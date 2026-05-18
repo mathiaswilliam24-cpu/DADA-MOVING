@@ -1,0 +1,173 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+}
+
+// ============================================================
+// NEXTAUTH MODELS
+// ============================================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  phone         String?
+  role          Role      @default(CUSTOMER)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+  bookings Booking[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ============================================================
+// CORE BUSINESS MODELS
+// ============================================================
+
+model Van {
+  id            String   @id @default(cuid())
+  name          String
+  description   String?
+  seats         Int      @default(2)
+  cargoCapacity String
+  imageUrl      String?
+  isAvailable   Boolean  @default(true)
+  features      String[] @default([])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  bookings     Booking[]
+  blockedDates BlockedDate[]
+}
+
+model Booking {
+  id             String        @id @default(cuid())
+  bookingNumber  String        @unique
+  userId         String
+  vanId          String
+  startDate      DateTime
+  endDate        DateTime
+  hours          Float
+  pickupLocation String
+  stateTaxCode   String        @default("TX")
+
+  rentalFee    Float
+  insuranceFee Float
+  subtotal     Float
+  taxRate      Float
+  taxAmount    Float
+  totalAmount  Float
+
+  status          BookingStatus @default(PENDING)
+  paymentStatus   PaymentStatus @default(UNPAID)
+  stripePaymentId String?
+  licenseUrl      String?
+  notes           String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  van     Van      @relation(fields: [vanId], references: [id])
+  receipt Receipt?
+}
+
+model Receipt {
+  id        String   @id @default(cuid())
+  bookingId String   @unique
+  pdfUrl    String?
+  createdAt DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+}
+
+model BlockedDate {
+  id     String   @id @default(cuid())
+  vanId  String
+  date   DateTime
+  reason String?
+
+  van Van @relation(fields: [vanId], references: [id], onDelete: Cascade)
+}
+
+model StateTax {
+  id      String @id @default(cuid())
+  state   String @unique
+  name    String
+  taxRate Float
+}
+
+model AppSettings {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
