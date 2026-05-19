@@ -4,11 +4,11 @@ import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
 const faqs = [
-  { q: "What is included in the $17/hour rate?", a: "The $17/hour rate covers the full van rental with unlimited mileage. You also pay a fixed $4 insurance fee per booking plus applicable state taxes. No hidden fees." },
+  { q: "What is included in the $17/hour rate?", a: "The $17.99/hour rate covers the full van rental with unlimited mileage. You also pay a fixed $4 insurance fee per booking plus applicable state taxes. No hidden fees." },
   { q: "Is there a minimum rental period?", a: "Yes, the minimum rental is 2 hours. There is no maximum — rent for as long as you need." },
   { q: "What are the fuel policies?", a: "You receive the van with a full tank and must return it full. If not, a $30 refueling fee applies." },
   { q: "What documents do I need to rent?", a: "You need a valid US driver's license (uploaded during booking), a credit/debit card, and must be at least 21 years old." },
-  { q: "Can I use the van for long-distance moves?", a: "Yes! Since there are no mileage fees, you can drive anywhere you need. The rate is simply $17 per hour regardless of distance." },
+  { q: "Can I use the van for long-distance moves?", a: "Yes! Since there are no mileage fees, you can drive anywhere you need. The rate is simply $17.99 per hour regardless of distance." },
   { q: "What happens if I return the van late?", a: "A late return fee of $25/hour applies if you keep the van beyond your booked return time. You can extend your booking online if needed." },
 ];
 

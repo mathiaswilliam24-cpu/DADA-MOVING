@@ -25,7 +25,7 @@ export interface PriceBreakdown {
 export function calculatePrice(
   hours: number,
   stateCode: string,
-  hourlyRate = 17,
+  hourlyRate = 17.99,
   insuranceFee = 4
 ): PriceBreakdown {
   const code = stateCode.toUpperCase();

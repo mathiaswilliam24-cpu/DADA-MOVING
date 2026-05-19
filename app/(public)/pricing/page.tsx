@@ -94,7 +94,11 @@ export default function PricingPage() {
           <div className="space-y-6">
             {/* Main rate */}
             <div className="rounded-2xl bg-[#1e3a5f] border border-[#2563eb]/30 p-8 text-center">
-              <div className="text-6xl font-black text-white mb-2">$17</div>
+              <div className="flex items-start justify-center mb-2">
+                <span className="text-3xl font-black text-white mt-2">$</span>
+                <span className="text-7xl font-black text-white leading-none">17</span>
+                <span className="text-3xl font-black text-[#f59e0b] mt-2">.99</span>
+              </div>
               <div className="text-[#93c5fd] text-lg font-semibold mb-1">per hour</div>
               <div className="text-[#7cb3f0] text-sm">All van sizes · No mileage fees</div>
 

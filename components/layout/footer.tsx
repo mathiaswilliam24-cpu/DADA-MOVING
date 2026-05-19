@@ -18,7 +18,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-[#94a3b8] text-sm leading-relaxed max-w-xs mb-5">
-              Affordable van rental in Houston. Only $17/hour with no mileage fees. Move more, pay less.
+              Affordable van rental in Houston. Only $17.99/hour with no mileage fees. Move more, pay less.
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-[#94a3b8]">
@@ -71,7 +71,7 @@ export default function Footer() {
           <p className="text-xs text-[#475569]">© {new Date().getFullYear()} DADA MOVING. All rights reserved.</p>
           <div className="flex items-center gap-2 text-xs text-[#475569]">
             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-            $17/hr · No Mileage Fees · Fixed $4 Insurance
+            $17.99/hr · No Mileage Fees · Fixed $4 Insurance
           </div>
         </div>
       </div>

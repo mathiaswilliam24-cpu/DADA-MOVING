@@ -8,6 +8,7 @@ import CTASection from "@/components/home/cta-section";
 import Link from "next/link";
 import { ArrowRight, Truck, Clock, CreditCard, CheckCircle2 } from "lucide-react";
 import { db } from "@/lib/db";
+import { PriceTag } from "@/components/ui/price-tag";
 import VanCard from "@/components/fleet/van-card";
 
 async function getFeaturedVans() {
@@ -62,10 +63,14 @@ function PricingBanner() {
               <h2 className="text-3xl font-black text-white mb-2">Simple, honest pricing</h2>
               <p className="text-blue-200 mb-6">No contracts. No hidden fees. No mileage limits. Ever.</p>
               <div className="grid grid-cols-3 gap-4 mb-8">
+                <div className="bg-white/10 rounded-2xl p-4 text-center">
+                  <PriceTag size="sm" />
+                  <div className="text-xs text-blue-200 font-semibold mt-1">per hour</div>
+                  <div className="text-xs text-blue-300/60 mt-0.5">All vans</div>
+                </div>
                 {[
-                  { value: "$17", label: "per hour", sub: "All vans" },
-                  { value: "$4",  label: "insurance", sub: "Fixed fee" },
-                  { value: "$0",  label: "mileage",   sub: "Free miles" },
+                  { value: "$4", label: "insurance", sub: "Fixed fee" },
+                  { value: "$0", label: "mileage",   sub: "Free miles" },
                 ].map((item) => (
                   <div key={item.label} className="bg-white/10 rounded-2xl p-4 text-center">
                     <div className="text-2xl font-black text-[#f59e0b]">{item.value}</div>

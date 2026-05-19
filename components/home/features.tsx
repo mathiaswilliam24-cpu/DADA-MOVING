@@ -1,7 +1,7 @@
 import { Gauge, Shield, CreditCard, Zap, Clock, MapPin } from "lucide-react";
 
 const features = [
-  { icon: Gauge,      title: "No Mileage Fees",      desc: "Drive as many miles as you need. Our flat $17/hour rate covers unlimited mileage.", color: "bg-green-100 text-green-700" },
+  { icon: Gauge,      title: "No Mileage Fees",      desc: "Drive as many miles as you need. Our flat $17.99/hour rate covers unlimited mileage.", color: "bg-green-100 text-green-700" },
   { icon: Shield,     title: "Fixed $4 Insurance",    desc: "One flat insurance fee per rental. No variable rates, no complicated tiers.", color: "bg-blue-100 text-blue-700" },
   { icon: CreditCard, title: "Transparent Pricing",   desc: "See the full cost — rental, insurance, taxes — before you confirm. Zero surprises.", color: "bg-purple-100 text-purple-700" },
   { icon: Zap,        title: "Online Booking",        desc: "Reserve your van in under 3 minutes from any device. No phone calls needed.", color: "bg-amber-100 text-amber-700" },

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Users, Package, ArrowRight, CheckCircle2 } from "lucide-react";
+import { PriceTag } from "@/components/ui/price-tag";
 
 interface Van {
   id: string; name: string; description?: string | null;
@@ -58,7 +59,7 @@ export default function VanCard({ van }: { van: Van }) {
         <div className="flex items-center justify-between pt-4 border-t border-[#f1f5f9]">
           <div>
             <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-black text-[#1e3a8a]">$17</span>
+              <PriceTag size="sm" lightMode />
               <span className="text-[#64748b] text-sm">/hour</span>
             </div>
             <div className="text-xs text-[#94a3b8]">+ $4 insurance · No mileage fee</div>

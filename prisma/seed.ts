@@ -13,7 +13,7 @@ async function main() {
 
   // ── App Settings ──────────────────────────────────────────────────────
   const settings = [
-    { key: "hourlyRate",    value: "17" },
+    { key: "hourlyRate",    value: "17.99" },
     { key: "insuranceFee",  value: "4" },
     { key: "minHours",      value: "2" },
     { key: "lateReturnFee", value: "25" },

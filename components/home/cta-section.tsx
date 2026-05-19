@@ -12,7 +12,7 @@ export default function CTASection() {
           <Truck size={30} className="text-white" />
         </div>
         <h2 className="text-4xl sm:text-5xl font-black text-white mb-4">Ready to move?</h2>
-        <p className="text-xl text-blue-200 font-semibold mb-2">Rent a Van for Only $17/Hour — No Mileage Fees.</p>
+        <p className="text-xl text-blue-200 font-semibold mb-2">Rent a Van for Only $17.99/Hour — No Mileage Fees.</p>
         <p className="text-blue-300 mb-10 max-w-xl mx-auto">No surprise charges. No hidden fees. Perfect for moving, deliveries, furniture pickup, and small business use.</p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
