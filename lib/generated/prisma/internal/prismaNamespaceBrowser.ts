@@ -57,6 +57,7 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Van: 'Van',
   Booking: 'Booking',
+  RentalExtension: 'RentalExtension',
   CheckIn: 'CheckIn',
   DropOff: 'DropOff',
   NotificationLog: 'NotificationLog',
@@ -178,6 +179,29 @@ export const BookingScalarFieldEnum = {
 } as const
 
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const RentalExtensionScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  originalEndDate: 'originalEndDate',
+  newEndDate: 'newEndDate',
+  additionalHours: 'additionalHours',
+  additionalCost: 'additionalCost',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  totalAdditional: 'totalAdditional',
+  stateTaxCode: 'stateTaxCode',
+  stripePaymentId: 'stripePaymentId',
+  paymentStatus: 'paymentStatus',
+  smsSentAt: 'smsSentAt',
+  emailSentAt: 'emailSentAt',
+  smsStatus: 'smsStatus',
+  emailStatus: 'emailStatus',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalExtensionScalarFieldEnum = (typeof RentalExtensionScalarFieldEnum)[keyof typeof RentalExtensionScalarFieldEnum]
 
 
 export const CheckInScalarFieldEnum = {

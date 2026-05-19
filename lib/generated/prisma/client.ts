@@ -72,6 +72,11 @@ export type Van = Prisma.VanModel
  */
 export type Booking = Prisma.BookingModel
 /**
+ * Model RentalExtension
+ * 
+ */
+export type RentalExtension = Prisma.RentalExtensionModel
+/**
  * Model CheckIn
  * 
  */

@@ -390,6 +390,7 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Van: 'Van',
   Booking: 'Booking',
+  RentalExtension: 'RentalExtension',
   CheckIn: 'CheckIn',
   DropOff: 'DropOff',
   NotificationLog: 'NotificationLog',
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "van" | "booking" | "checkIn" | "dropOff" | "notificationLog" | "receipt" | "blockedDate" | "stateTax" | "appSettings"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "van" | "booking" | "rentalExtension" | "checkIn" | "dropOff" | "notificationLog" | "receipt" | "blockedDate" | "stateTax" | "appSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -857,6 +858,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.BookingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.BookingCountAggregateOutputType> | number
+        }
+      }
+    }
+    RentalExtension: {
+      payload: Prisma.$RentalExtensionPayload<ExtArgs>
+      fields: Prisma.RentalExtensionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RentalExtensionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RentalExtensionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>
+        }
+        findFirst: {
+          args: Prisma.RentalExtensionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RentalExtensionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>
+        }
+        findMany: {
+          args: Prisma.RentalExtensionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>[]
+        }
+        create: {
+          args: Prisma.RentalExtensionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>
+        }
+        createMany: {
+          args: Prisma.RentalExtensionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RentalExtensionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>[]
+        }
+        delete: {
+          args: Prisma.RentalExtensionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>
+        }
+        update: {
+          args: Prisma.RentalExtensionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>
+        }
+        deleteMany: {
+          args: Prisma.RentalExtensionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RentalExtensionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RentalExtensionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>[]
+        }
+        upsert: {
+          args: Prisma.RentalExtensionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RentalExtensionPayload>
+        }
+        aggregate: {
+          args: Prisma.RentalExtensionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRentalExtension>
+        }
+        groupBy: {
+          args: Prisma.RentalExtensionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalExtensionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RentalExtensionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentalExtensionCountAggregateOutputType> | number
         }
       }
     }
@@ -1515,6 +1590,29 @@ export const BookingScalarFieldEnum = {
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
 
 
+export const RentalExtensionScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  originalEndDate: 'originalEndDate',
+  newEndDate: 'newEndDate',
+  additionalHours: 'additionalHours',
+  additionalCost: 'additionalCost',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  totalAdditional: 'totalAdditional',
+  stateTaxCode: 'stateTaxCode',
+  stripePaymentId: 'stripePaymentId',
+  paymentStatus: 'paymentStatus',
+  smsSentAt: 'smsSentAt',
+  emailSentAt: 'emailSentAt',
+  smsStatus: 'smsStatus',
+  emailStatus: 'emailStatus',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalExtensionScalarFieldEnum = (typeof RentalExtensionScalarFieldEnum)[keyof typeof RentalExtensionScalarFieldEnum]
+
+
 export const CheckInScalarFieldEnum = {
   id: 'id',
   bookingId: 'bookingId',
@@ -1881,6 +1979,7 @@ export type GlobalOmitConfig = {
   verificationToken?: Prisma.VerificationTokenOmit
   van?: Prisma.VanOmit
   booking?: Prisma.BookingOmit
+  rentalExtension?: Prisma.RentalExtensionOmit
   checkIn?: Prisma.CheckInOmit
   dropOff?: Prisma.DropOffOmit
   notificationLog?: Prisma.NotificationLogOmit
