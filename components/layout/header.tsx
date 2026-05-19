@@ -91,6 +91,10 @@ export default function Header() {
                       <Link href="/admin" onClick={() => setDropOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm text-[#0f172a] hover:bg-[#f8fafc]">
                         <ShieldCheck size={16} className="text-[#1e3a8a]" /> Admin Dashboard
                       </Link>
+                    ) : session.user?.role === "DRIVER" ? (
+                      <Link href="/driver" onClick={() => setDropOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm text-[#0f172a] hover:bg-[#f8fafc]">
+                        <Truck size={16} className="text-[#f59e0b]" /> Driver Dashboard
+                      </Link>
                     ) : (
                       <Link href="/dashboard" onClick={() => setDropOpen(false)} className="flex items-center gap-3 px-4 py-3 text-sm text-[#0f172a] hover:bg-[#f8fafc]">
                         <LayoutDashboard size={16} className="text-[#1e3a8a]" /> My Dashboard

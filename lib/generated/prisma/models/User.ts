@@ -242,6 +242,7 @@ export type UserWhereInput = {
   sessions?: Prisma.SessionListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
   savedCards?: Prisma.SavedCardListRelationFilter
+  driverBookings?: Prisma.BookingListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -261,6 +262,7 @@ export type UserOrderByWithRelationInput = {
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   bookings?: Prisma.BookingOrderByRelationAggregateInput
   savedCards?: Prisma.SavedCardOrderByRelationAggregateInput
+  driverBookings?: Prisma.BookingOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -283,6 +285,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sessions?: Prisma.SessionListRelationFilter
   bookings?: Prisma.BookingListRelationFilter
   savedCards?: Prisma.SavedCardListRelationFilter
+  driverBookings?: Prisma.BookingListRelationFilter
 }, "id" | "email" | "stripeCustomerId">
 
 export type UserOrderByWithAggregationInput = {
@@ -338,6 +341,7 @@ export type UserCreateInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   bookings?: Prisma.BookingCreateNestedManyWithoutUserInput
   savedCards?: Prisma.SavedCardCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -357,6 +361,7 @@ export type UserUncheckedCreateInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUserInput
   savedCards?: Prisma.SavedCardUncheckedCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingUncheckedCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserUpdateInput = {
@@ -376,6 +381,7 @@ export type UserUpdateInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutUserNestedInput
   savedCards?: Prisma.SavedCardUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUpdateManyWithoutAssignedDriverNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -395,6 +401,7 @@ export type UserUncheckedUpdateInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutUserNestedInput
   savedCards?: Prisma.SavedCardUncheckedUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUncheckedUpdateManyWithoutAssignedDriverNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -492,6 +499,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -544,10 +556,26 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
+export type UserCreateNestedOneWithoutDriverBookingsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDriverBookingsInput, Prisma.UserUncheckedCreateWithoutDriverBookingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDriverBookingsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
 export type UserCreateNestedOneWithoutBookingsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutBookingsInput, Prisma.UserUncheckedCreateWithoutBookingsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutBookingsInput
   connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutDriverBookingsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDriverBookingsInput, Prisma.UserUncheckedCreateWithoutDriverBookingsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDriverBookingsInput
+  upsert?: Prisma.UserUpsertWithoutDriverBookingsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDriverBookingsInput, Prisma.UserUpdateWithoutDriverBookingsInput>, Prisma.UserUncheckedUpdateWithoutDriverBookingsInput>
 }
 
 export type UserUpdateOneRequiredWithoutBookingsNestedInput = {
@@ -588,6 +616,7 @@ export type UserCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   bookings?: Prisma.BookingCreateNestedManyWithoutUserInput
   savedCards?: Prisma.SavedCardCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -606,6 +635,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUserInput
   savedCards?: Prisma.SavedCardUncheckedCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingUncheckedCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -640,6 +670,7 @@ export type UserUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutUserNestedInput
   savedCards?: Prisma.SavedCardUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUpdateManyWithoutAssignedDriverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -658,6 +689,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutUserNestedInput
   savedCards?: Prisma.SavedCardUncheckedUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUncheckedUpdateManyWithoutAssignedDriverNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -676,6 +708,7 @@ export type UserCreateWithoutSessionsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   bookings?: Prisma.BookingCreateNestedManyWithoutUserInput
   savedCards?: Prisma.SavedCardCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -694,6 +727,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUserInput
   savedCards?: Prisma.SavedCardUncheckedCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingUncheckedCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -728,6 +762,7 @@ export type UserUpdateWithoutSessionsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutUserNestedInput
   savedCards?: Prisma.SavedCardUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUpdateManyWithoutAssignedDriverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -746,6 +781,50 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutUserNestedInput
   savedCards?: Prisma.SavedCardUncheckedUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUncheckedUpdateManyWithoutAssignedDriverNestedInput
+}
+
+export type UserCreateWithoutDriverBookingsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  phone?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  stripeCustomerId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  bookings?: Prisma.BookingCreateNestedManyWithoutUserInput
+  savedCards?: Prisma.SavedCardCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutDriverBookingsInput = {
+  id?: string
+  name?: string | null
+  email: string
+  emailVerified?: Date | string | null
+  image?: string | null
+  password?: string | null
+  phone?: string | null
+  role?: $Enums.Role
+  isActive?: boolean
+  stripeCustomerId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUserInput
+  savedCards?: Prisma.SavedCardUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutDriverBookingsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutDriverBookingsInput, Prisma.UserUncheckedCreateWithoutDriverBookingsInput>
 }
 
 export type UserCreateWithoutBookingsInput = {
@@ -764,6 +843,7 @@ export type UserCreateWithoutBookingsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   savedCards?: Prisma.SavedCardCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserUncheckedCreateWithoutBookingsInput = {
@@ -782,11 +862,61 @@ export type UserUncheckedCreateWithoutBookingsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   savedCards?: Prisma.SavedCardUncheckedCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingUncheckedCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserCreateOrConnectWithoutBookingsInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutBookingsInput, Prisma.UserUncheckedCreateWithoutBookingsInput>
+}
+
+export type UserUpsertWithoutDriverBookingsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDriverBookingsInput, Prisma.UserUncheckedUpdateWithoutDriverBookingsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDriverBookingsInput, Prisma.UserUncheckedCreateWithoutDriverBookingsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutDriverBookingsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDriverBookingsInput, Prisma.UserUncheckedUpdateWithoutDriverBookingsInput>
+}
+
+export type UserUpdateWithoutDriverBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  bookings?: Prisma.BookingUpdateManyWithoutUserNestedInput
+  savedCards?: Prisma.SavedCardUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutDriverBookingsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  bookings?: Prisma.BookingUncheckedUpdateManyWithoutUserNestedInput
+  savedCards?: Prisma.SavedCardUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutBookingsInput = {
@@ -816,6 +946,7 @@ export type UserUpdateWithoutBookingsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   savedCards?: Prisma.SavedCardUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUpdateManyWithoutAssignedDriverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBookingsInput = {
@@ -834,6 +965,7 @@ export type UserUncheckedUpdateWithoutBookingsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   savedCards?: Prisma.SavedCardUncheckedUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUncheckedUpdateManyWithoutAssignedDriverNestedInput
 }
 
 export type UserCreateWithoutSavedCardsInput = {
@@ -852,6 +984,7 @@ export type UserCreateWithoutSavedCardsInput = {
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   bookings?: Prisma.BookingCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserUncheckedCreateWithoutSavedCardsInput = {
@@ -870,6 +1003,7 @@ export type UserUncheckedCreateWithoutSavedCardsInput = {
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   bookings?: Prisma.BookingUncheckedCreateNestedManyWithoutUserInput
+  driverBookings?: Prisma.BookingUncheckedCreateNestedManyWithoutAssignedDriverInput
 }
 
 export type UserCreateOrConnectWithoutSavedCardsInput = {
@@ -904,6 +1038,7 @@ export type UserUpdateWithoutSavedCardsInput = {
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   bookings?: Prisma.BookingUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUpdateManyWithoutAssignedDriverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSavedCardsInput = {
@@ -922,6 +1057,7 @@ export type UserUncheckedUpdateWithoutSavedCardsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   bookings?: Prisma.BookingUncheckedUpdateManyWithoutUserNestedInput
+  driverBookings?: Prisma.BookingUncheckedUpdateManyWithoutAssignedDriverNestedInput
 }
 
 
@@ -934,6 +1070,7 @@ export type UserCountOutputType = {
   sessions: number
   bookings: number
   savedCards: number
+  driverBookings: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -941,6 +1078,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   bookings?: boolean | UserCountOutputTypeCountBookingsArgs
   savedCards?: boolean | UserCountOutputTypeCountSavedCardsArgs
+  driverBookings?: boolean | UserCountOutputTypeCountDriverBookingsArgs
 }
 
 /**
@@ -981,6 +1119,13 @@ export type UserCountOutputTypeCountSavedCardsArgs<ExtArgs extends runtime.Types
   where?: Prisma.SavedCardWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountDriverBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BookingWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -999,6 +1144,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   bookings?: boolean | Prisma.User$bookingsArgs<ExtArgs>
   savedCards?: boolean | Prisma.User$savedCardsArgs<ExtArgs>
+  driverBookings?: boolean | Prisma.User$driverBookingsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1053,6 +1199,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   bookings?: boolean | Prisma.User$bookingsArgs<ExtArgs>
   savedCards?: boolean | Prisma.User$savedCardsArgs<ExtArgs>
+  driverBookings?: boolean | Prisma.User$driverBookingsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1065,6 +1212,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     bookings: Prisma.$BookingPayload<ExtArgs>[]
     savedCards: Prisma.$SavedCardPayload<ExtArgs>[]
+    driverBookings: Prisma.$BookingPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1477,6 +1625,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   bookings<T extends Prisma.User$bookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savedCards<T extends Prisma.User$savedCardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savedCardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedCardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  driverBookings<T extends Prisma.User$driverBookingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$driverBookingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2004,6 +2153,30 @@ export type User$savedCardsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.SavedCardScalarFieldEnum | Prisma.SavedCardScalarFieldEnum[]
+}
+
+/**
+ * User.driverBookings
+ */
+export type User$driverBookingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Booking
+   */
+  select?: Prisma.BookingSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Booking
+   */
+  omit?: Prisma.BookingOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BookingInclude<ExtArgs> | null
+  where?: Prisma.BookingWhereInput
+  orderBy?: Prisma.BookingOrderByWithRelationInput | Prisma.BookingOrderByWithRelationInput[]
+  cursor?: Prisma.BookingWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BookingScalarFieldEnum | Prisma.BookingScalarFieldEnum[]
 }
 
 /**

@@ -69,6 +69,9 @@ export type BookingMinAggregateOutputType = {
   savedCardId: string | null
   licenseUrl: string | null
   notes: string | null
+  assignedDriverId: string | null
+  driverNote: string | null
+  deliveredAt: Date | null
   cardAuthActive: boolean | null
   cardAuthExpiresAt: Date | null
   cardDeactivatedAt: Date | null
@@ -99,6 +102,9 @@ export type BookingMaxAggregateOutputType = {
   savedCardId: string | null
   licenseUrl: string | null
   notes: string | null
+  assignedDriverId: string | null
+  driverNote: string | null
+  deliveredAt: Date | null
   cardAuthActive: boolean | null
   cardAuthExpiresAt: Date | null
   cardDeactivatedAt: Date | null
@@ -129,6 +135,9 @@ export type BookingCountAggregateOutputType = {
   savedCardId: number
   licenseUrl: number
   notes: number
+  assignedDriverId: number
+  driverNote: number
+  deliveredAt: number
   cardAuthActive: number
   cardAuthExpiresAt: number
   cardDeactivatedAt: number
@@ -181,6 +190,9 @@ export type BookingMinAggregateInputType = {
   savedCardId?: true
   licenseUrl?: true
   notes?: true
+  assignedDriverId?: true
+  driverNote?: true
+  deliveredAt?: true
   cardAuthActive?: true
   cardAuthExpiresAt?: true
   cardDeactivatedAt?: true
@@ -211,6 +223,9 @@ export type BookingMaxAggregateInputType = {
   savedCardId?: true
   licenseUrl?: true
   notes?: true
+  assignedDriverId?: true
+  driverNote?: true
+  deliveredAt?: true
   cardAuthActive?: true
   cardAuthExpiresAt?: true
   cardDeactivatedAt?: true
@@ -241,6 +256,9 @@ export type BookingCountAggregateInputType = {
   savedCardId?: true
   licenseUrl?: true
   notes?: true
+  assignedDriverId?: true
+  driverNote?: true
+  deliveredAt?: true
   cardAuthActive?: true
   cardAuthExpiresAt?: true
   cardDeactivatedAt?: true
@@ -358,6 +376,9 @@ export type BookingGroupByOutputType = {
   savedCardId: string | null
   licenseUrl: string | null
   notes: string | null
+  assignedDriverId: string | null
+  driverNote: string | null
+  deliveredAt: Date | null
   cardAuthActive: boolean
   cardAuthExpiresAt: Date | null
   cardDeactivatedAt: Date | null
@@ -411,11 +432,15 @@ export type BookingWhereInput = {
   savedCardId?: Prisma.StringNullableFilter<"Booking"> | string | null
   licenseUrl?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  assignedDriverId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  driverNote?: Prisma.StringNullableFilter<"Booking"> | string | null
+  deliveredAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cardAuthActive?: Prisma.BoolFilter<"Booking"> | boolean
   cardAuthExpiresAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cardDeactivatedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  assignedDriver?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   van?: Prisma.XOR<Prisma.VanScalarRelationFilter, Prisma.VanWhereInput>
   receipt?: Prisma.XOR<Prisma.ReceiptNullableScalarRelationFilter, Prisma.ReceiptWhereInput> | null
@@ -449,11 +474,15 @@ export type BookingOrderByWithRelationInput = {
   savedCardId?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  assignedDriverId?: Prisma.SortOrderInput | Prisma.SortOrder
+  driverNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  deliveredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cardAuthActive?: Prisma.SortOrder
   cardAuthExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cardDeactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  assignedDriver?: Prisma.UserOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   van?: Prisma.VanOrderByWithRelationInput
   receipt?: Prisma.ReceiptOrderByWithRelationInput
@@ -490,11 +519,15 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   savedCardId?: Prisma.StringNullableFilter<"Booking"> | string | null
   licenseUrl?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  assignedDriverId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  driverNote?: Prisma.StringNullableFilter<"Booking"> | string | null
+  deliveredAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cardAuthActive?: Prisma.BoolFilter<"Booking"> | boolean
   cardAuthExpiresAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cardDeactivatedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
+  assignedDriver?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   van?: Prisma.XOR<Prisma.VanScalarRelationFilter, Prisma.VanWhereInput>
   receipt?: Prisma.XOR<Prisma.ReceiptNullableScalarRelationFilter, Prisma.ReceiptWhereInput> | null
@@ -528,6 +561,9 @@ export type BookingOrderByWithAggregationInput = {
   savedCardId?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  assignedDriverId?: Prisma.SortOrderInput | Prisma.SortOrder
+  driverNote?: Prisma.SortOrderInput | Prisma.SortOrder
+  deliveredAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cardAuthActive?: Prisma.SortOrder
   cardAuthExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   cardDeactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -566,6 +602,9 @@ export type BookingScalarWhereWithAggregatesInput = {
   savedCardId?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   licenseUrl?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  assignedDriverId?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  driverNote?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  deliveredAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
   cardAuthActive?: Prisma.BoolWithAggregatesFilter<"Booking"> | boolean
   cardAuthExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
   cardDeactivatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
@@ -594,11 +633,14 @@ export type BookingCreateInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
@@ -632,6 +674,9 @@ export type BookingUncheckedCreateInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -666,11 +711,14 @@ export type BookingUpdateInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
@@ -704,6 +752,9 @@ export type BookingUncheckedUpdateInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -740,6 +791,9 @@ export type BookingCreateManyInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -768,6 +822,8 @@ export type BookingUpdateManyMutationInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -798,6 +854,9 @@ export type BookingUncheckedUpdateManyInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -838,6 +897,9 @@ export type BookingCountOrderByAggregateInput = {
   savedCardId?: Prisma.SortOrder
   licenseUrl?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  assignedDriverId?: Prisma.SortOrder
+  driverNote?: Prisma.SortOrder
+  deliveredAt?: Prisma.SortOrder
   cardAuthActive?: Prisma.SortOrder
   cardAuthExpiresAt?: Prisma.SortOrder
   cardDeactivatedAt?: Prisma.SortOrder
@@ -878,6 +940,9 @@ export type BookingMaxOrderByAggregateInput = {
   savedCardId?: Prisma.SortOrder
   licenseUrl?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  assignedDriverId?: Prisma.SortOrder
+  driverNote?: Prisma.SortOrder
+  deliveredAt?: Prisma.SortOrder
   cardAuthActive?: Prisma.SortOrder
   cardAuthExpiresAt?: Prisma.SortOrder
   cardDeactivatedAt?: Prisma.SortOrder
@@ -908,6 +973,9 @@ export type BookingMinOrderByAggregateInput = {
   savedCardId?: Prisma.SortOrder
   licenseUrl?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  assignedDriverId?: Prisma.SortOrder
+  driverNote?: Prisma.SortOrder
+  deliveredAt?: Prisma.SortOrder
   cardAuthActive?: Prisma.SortOrder
   cardAuthExpiresAt?: Prisma.SortOrder
   cardDeactivatedAt?: Prisma.SortOrder
@@ -937,10 +1005,24 @@ export type BookingCreateNestedManyWithoutUserInput = {
   connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
 }
 
+export type BookingCreateNestedManyWithoutAssignedDriverInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutAssignedDriverInput, Prisma.BookingUncheckedCreateWithoutAssignedDriverInput> | Prisma.BookingCreateWithoutAssignedDriverInput[] | Prisma.BookingUncheckedCreateWithoutAssignedDriverInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutAssignedDriverInput | Prisma.BookingCreateOrConnectWithoutAssignedDriverInput[]
+  createMany?: Prisma.BookingCreateManyAssignedDriverInputEnvelope
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+}
+
 export type BookingUncheckedCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput> | Prisma.BookingCreateWithoutUserInput[] | Prisma.BookingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.BookingCreateOrConnectWithoutUserInput | Prisma.BookingCreateOrConnectWithoutUserInput[]
   createMany?: Prisma.BookingCreateManyUserInputEnvelope
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+}
+
+export type BookingUncheckedCreateNestedManyWithoutAssignedDriverInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutAssignedDriverInput, Prisma.BookingUncheckedCreateWithoutAssignedDriverInput> | Prisma.BookingCreateWithoutAssignedDriverInput[] | Prisma.BookingUncheckedCreateWithoutAssignedDriverInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutAssignedDriverInput | Prisma.BookingCreateOrConnectWithoutAssignedDriverInput[]
+  createMany?: Prisma.BookingCreateManyAssignedDriverInputEnvelope
   connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
 }
 
@@ -958,6 +1040,20 @@ export type BookingUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
+export type BookingUpdateManyWithoutAssignedDriverNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutAssignedDriverInput, Prisma.BookingUncheckedCreateWithoutAssignedDriverInput> | Prisma.BookingCreateWithoutAssignedDriverInput[] | Prisma.BookingUncheckedCreateWithoutAssignedDriverInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutAssignedDriverInput | Prisma.BookingCreateOrConnectWithoutAssignedDriverInput[]
+  upsert?: Prisma.BookingUpsertWithWhereUniqueWithoutAssignedDriverInput | Prisma.BookingUpsertWithWhereUniqueWithoutAssignedDriverInput[]
+  createMany?: Prisma.BookingCreateManyAssignedDriverInputEnvelope
+  set?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  disconnect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  delete?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  update?: Prisma.BookingUpdateWithWhereUniqueWithoutAssignedDriverInput | Prisma.BookingUpdateWithWhereUniqueWithoutAssignedDriverInput[]
+  updateMany?: Prisma.BookingUpdateManyWithWhereWithoutAssignedDriverInput | Prisma.BookingUpdateManyWithWhereWithoutAssignedDriverInput[]
+  deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
+}
+
 export type BookingUncheckedUpdateManyWithoutUserNestedInput = {
   create?: Prisma.XOR<Prisma.BookingCreateWithoutUserInput, Prisma.BookingUncheckedCreateWithoutUserInput> | Prisma.BookingCreateWithoutUserInput[] | Prisma.BookingUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.BookingCreateOrConnectWithoutUserInput | Prisma.BookingCreateOrConnectWithoutUserInput[]
@@ -969,6 +1065,20 @@ export type BookingUncheckedUpdateManyWithoutUserNestedInput = {
   connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
   update?: Prisma.BookingUpdateWithWhereUniqueWithoutUserInput | Prisma.BookingUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.BookingUpdateManyWithWhereWithoutUserInput | Prisma.BookingUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
+}
+
+export type BookingUncheckedUpdateManyWithoutAssignedDriverNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutAssignedDriverInput, Prisma.BookingUncheckedCreateWithoutAssignedDriverInput> | Prisma.BookingCreateWithoutAssignedDriverInput[] | Prisma.BookingUncheckedCreateWithoutAssignedDriverInput[]
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutAssignedDriverInput | Prisma.BookingCreateOrConnectWithoutAssignedDriverInput[]
+  upsert?: Prisma.BookingUpsertWithWhereUniqueWithoutAssignedDriverInput | Prisma.BookingUpsertWithWhereUniqueWithoutAssignedDriverInput[]
+  createMany?: Prisma.BookingCreateManyAssignedDriverInputEnvelope
+  set?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  disconnect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  delete?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  connect?: Prisma.BookingWhereUniqueInput | Prisma.BookingWhereUniqueInput[]
+  update?: Prisma.BookingUpdateWithWhereUniqueWithoutAssignedDriverInput | Prisma.BookingUpdateWithWhereUniqueWithoutAssignedDriverInput[]
+  updateMany?: Prisma.BookingUpdateManyWithWhereWithoutAssignedDriverInput | Prisma.BookingUpdateManyWithWhereWithoutAssignedDriverInput[]
   deleteMany?: Prisma.BookingScalarWhereInput | Prisma.BookingScalarWhereInput[]
 }
 
@@ -1135,11 +1245,14 @@ export type BookingCreateWithoutUserInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
   checkIn?: Prisma.CheckInCreateNestedOneWithoutBookingInput
@@ -1171,6 +1284,9 @@ export type BookingUncheckedCreateWithoutUserInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -1191,6 +1307,92 @@ export type BookingCreateOrConnectWithoutUserInput = {
 
 export type BookingCreateManyUserInputEnvelope = {
   data: Prisma.BookingCreateManyUserInput | Prisma.BookingCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type BookingCreateWithoutAssignedDriverInput = {
+  id?: string
+  bookingNumber: string
+  startDate: Date | string
+  endDate: Date | string
+  hours: number
+  deliveryAddress: string
+  stateTaxCode?: string
+  rentalFee: number
+  insuranceFee: number
+  subtotal: number
+  taxRate: number
+  taxAmount: number
+  totalAmount: number
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
+  licenseUrl?: string | null
+  notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutBookingsInput
+  van: Prisma.VanCreateNestedOneWithoutBookingsInput
+  receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
+  checkIn?: Prisma.CheckInCreateNestedOneWithoutBookingInput
+  dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
+  notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
+  extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
+}
+
+export type BookingUncheckedCreateWithoutAssignedDriverInput = {
+  id?: string
+  bookingNumber: string
+  userId: string
+  vanId: string
+  startDate: Date | string
+  endDate: Date | string
+  hours: number
+  deliveryAddress: string
+  stateTaxCode?: string
+  rentalFee: number
+  insuranceFee: number
+  subtotal: number
+  taxRate: number
+  taxAmount: number
+  totalAmount: number
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
+  licenseUrl?: string | null
+  notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
+  checkIn?: Prisma.CheckInUncheckedCreateNestedOneWithoutBookingInput
+  dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
+  notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
+  extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
+}
+
+export type BookingCreateOrConnectWithoutAssignedDriverInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutAssignedDriverInput, Prisma.BookingUncheckedCreateWithoutAssignedDriverInput>
+}
+
+export type BookingCreateManyAssignedDriverInputEnvelope = {
+  data: Prisma.BookingCreateManyAssignedDriverInput | Prisma.BookingCreateManyAssignedDriverInput[]
   skipDuplicates?: boolean
 }
 
@@ -1236,11 +1438,30 @@ export type BookingScalarWhereInput = {
   savedCardId?: Prisma.StringNullableFilter<"Booking"> | string | null
   licenseUrl?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  assignedDriverId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  driverNote?: Prisma.StringNullableFilter<"Booking"> | string | null
+  deliveredAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cardAuthActive?: Prisma.BoolFilter<"Booking"> | boolean
   cardAuthExpiresAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   cardDeactivatedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
+}
+
+export type BookingUpsertWithWhereUniqueWithoutAssignedDriverInput = {
+  where: Prisma.BookingWhereUniqueInput
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutAssignedDriverInput, Prisma.BookingUncheckedUpdateWithoutAssignedDriverInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutAssignedDriverInput, Prisma.BookingUncheckedCreateWithoutAssignedDriverInput>
+}
+
+export type BookingUpdateWithWhereUniqueWithoutAssignedDriverInput = {
+  where: Prisma.BookingWhereUniqueInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutAssignedDriverInput, Prisma.BookingUncheckedUpdateWithoutAssignedDriverInput>
+}
+
+export type BookingUpdateManyWithWhereWithoutAssignedDriverInput = {
+  where: Prisma.BookingScalarWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateManyMutationInput, Prisma.BookingUncheckedUpdateManyWithoutAssignedDriverInput>
 }
 
 export type BookingCreateWithoutVanInput = {
@@ -1264,11 +1485,14 @@ export type BookingCreateWithoutVanInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
   checkIn?: Prisma.CheckInCreateNestedOneWithoutBookingInput
@@ -1300,6 +1524,9 @@ export type BookingUncheckedCreateWithoutVanInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -1360,11 +1587,14 @@ export type BookingCreateWithoutAdditionalChargesInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
@@ -1397,6 +1627,9 @@ export type BookingUncheckedCreateWithoutAdditionalChargesInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -1446,11 +1679,14 @@ export type BookingUpdateWithoutAdditionalChargesInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
@@ -1483,6 +1719,9 @@ export type BookingUncheckedUpdateWithoutAdditionalChargesInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1516,11 +1755,14 @@ export type BookingCreateWithoutExtensionsInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
@@ -1553,6 +1795,9 @@ export type BookingUncheckedCreateWithoutExtensionsInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -1602,11 +1847,14 @@ export type BookingUpdateWithoutExtensionsInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
@@ -1639,6 +1887,9 @@ export type BookingUncheckedUpdateWithoutExtensionsInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1672,11 +1923,14 @@ export type BookingCreateWithoutCheckInInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
@@ -1709,6 +1963,9 @@ export type BookingUncheckedCreateWithoutCheckInInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -1758,11 +2015,14 @@ export type BookingUpdateWithoutCheckInInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
@@ -1795,6 +2055,9 @@ export type BookingUncheckedUpdateWithoutCheckInInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1828,11 +2091,14 @@ export type BookingCreateWithoutDropOffInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
@@ -1865,6 +2131,9 @@ export type BookingUncheckedCreateWithoutDropOffInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -1914,11 +2183,14 @@ export type BookingUpdateWithoutDropOffInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
@@ -1951,6 +2223,9 @@ export type BookingUncheckedUpdateWithoutDropOffInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -1984,11 +2259,14 @@ export type BookingCreateWithoutNotificationsInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
   receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
@@ -2021,6 +2299,9 @@ export type BookingUncheckedCreateWithoutNotificationsInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -2070,11 +2351,14 @@ export type BookingUpdateWithoutNotificationsInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
@@ -2107,6 +2391,9 @@ export type BookingUncheckedUpdateWithoutNotificationsInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2140,11 +2427,14 @@ export type BookingCreateWithoutReceiptInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedDriver?: Prisma.UserCreateNestedOneWithoutDriverBookingsInput
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
   checkIn?: Prisma.CheckInCreateNestedOneWithoutBookingInput
@@ -2177,6 +2467,9 @@ export type BookingUncheckedCreateWithoutReceiptInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -2226,11 +2519,14 @@ export type BookingUpdateWithoutReceiptInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
   checkIn?: Prisma.CheckInUpdateOneWithoutBookingNestedInput
@@ -2263,6 +2559,9 @@ export type BookingUncheckedUpdateWithoutReceiptInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2297,6 +2596,41 @@ export type BookingCreateManyUserInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type BookingCreateManyAssignedDriverInput = {
+  id?: string
+  bookingNumber: string
+  userId: string
+  vanId: string
+  startDate: Date | string
+  endDate: Date | string
+  hours: number
+  deliveryAddress: string
+  stateTaxCode?: string
+  rentalFee: number
+  insuranceFee: number
+  subtotal: number
+  taxRate: number
+  taxAmount: number
+  totalAmount: number
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
+  licenseUrl?: string | null
+  notes?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -2325,11 +2659,14 @@ export type BookingUpdateWithoutUserInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
   checkIn?: Prisma.CheckInUpdateOneWithoutBookingNestedInput
@@ -2361,6 +2698,9 @@ export type BookingUncheckedUpdateWithoutUserInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2396,6 +2736,117 @@ export type BookingUncheckedUpdateManyWithoutUserInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BookingUpdateWithoutAssignedDriverInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  hours?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  stateTaxCode?: Prisma.StringFieldUpdateOperationsInput | string
+  rentalFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  insuranceFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
+  van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
+  receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
+  checkIn?: Prisma.CheckInUpdateOneWithoutBookingNestedInput
+  dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
+  notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
+  extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutAssignedDriverInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  vanId?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  hours?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  stateTaxCode?: Prisma.StringFieldUpdateOperationsInput | string
+  rentalFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  insuranceFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
+  checkIn?: Prisma.CheckInUncheckedUpdateOneWithoutBookingNestedInput
+  dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
+  notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
+  extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateManyWithoutAssignedDriverInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  vanId?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  hours?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  stateTaxCode?: Prisma.StringFieldUpdateOperationsInput | string
+  rentalFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  insuranceFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2425,6 +2876,9 @@ export type BookingCreateManyVanInput = {
   savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  assignedDriverId?: string | null
+  driverNote?: string | null
+  deliveredAt?: Date | string | null
   cardAuthActive?: boolean
   cardAuthExpiresAt?: Date | string | null
   cardDeactivatedAt?: Date | string | null
@@ -2453,11 +2907,14 @@ export type BookingUpdateWithoutVanInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedDriver?: Prisma.UserUpdateOneWithoutDriverBookingsNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
   receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
   checkIn?: Prisma.CheckInUpdateOneWithoutBookingNestedInput
@@ -2489,6 +2946,9 @@ export type BookingUncheckedUpdateWithoutVanInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2524,6 +2984,9 @@ export type BookingUncheckedUpdateManyWithoutVanInput = {
   savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedDriverId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  driverNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  deliveredAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -2603,11 +3066,15 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   savedCardId?: boolean
   licenseUrl?: boolean
   notes?: boolean
+  assignedDriverId?: boolean
+  driverNote?: boolean
+  deliveredAt?: boolean
   cardAuthActive?: boolean
   cardAuthExpiresAt?: boolean
   cardDeactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  assignedDriver?: boolean | Prisma.Booking$assignedDriverArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   van?: boolean | Prisma.VanDefaultArgs<ExtArgs>
   receipt?: boolean | Prisma.Booking$receiptArgs<ExtArgs>
@@ -2642,11 +3109,15 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   savedCardId?: boolean
   licenseUrl?: boolean
   notes?: boolean
+  assignedDriverId?: boolean
+  driverNote?: boolean
+  deliveredAt?: boolean
   cardAuthActive?: boolean
   cardAuthExpiresAt?: boolean
   cardDeactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  assignedDriver?: boolean | Prisma.Booking$assignedDriverArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   van?: boolean | Prisma.VanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
@@ -2674,11 +3145,15 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   savedCardId?: boolean
   licenseUrl?: boolean
   notes?: boolean
+  assignedDriverId?: boolean
+  driverNote?: boolean
+  deliveredAt?: boolean
   cardAuthActive?: boolean
   cardAuthExpiresAt?: boolean
   cardDeactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  assignedDriver?: boolean | Prisma.Booking$assignedDriverArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   van?: boolean | Prisma.VanDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
@@ -2706,6 +3181,9 @@ export type BookingSelectScalar = {
   savedCardId?: boolean
   licenseUrl?: boolean
   notes?: boolean
+  assignedDriverId?: boolean
+  driverNote?: boolean
+  deliveredAt?: boolean
   cardAuthActive?: boolean
   cardAuthExpiresAt?: boolean
   cardDeactivatedAt?: boolean
@@ -2713,8 +3191,9 @@ export type BookingSelectScalar = {
   updatedAt?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingNumber" | "userId" | "vanId" | "startDate" | "endDate" | "hours" | "deliveryAddress" | "stateTaxCode" | "rentalFee" | "insuranceFee" | "subtotal" | "taxRate" | "taxAmount" | "totalAmount" | "status" | "paymentStatus" | "stripePaymentId" | "stripePaymentMethodId" | "savedCardId" | "licenseUrl" | "notes" | "cardAuthActive" | "cardAuthExpiresAt" | "cardDeactivatedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingNumber" | "userId" | "vanId" | "startDate" | "endDate" | "hours" | "deliveryAddress" | "stateTaxCode" | "rentalFee" | "insuranceFee" | "subtotal" | "taxRate" | "taxAmount" | "totalAmount" | "status" | "paymentStatus" | "stripePaymentId" | "stripePaymentMethodId" | "savedCardId" | "licenseUrl" | "notes" | "assignedDriverId" | "driverNote" | "deliveredAt" | "cardAuthActive" | "cardAuthExpiresAt" | "cardDeactivatedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  assignedDriver?: boolean | Prisma.Booking$assignedDriverArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   van?: boolean | Prisma.VanDefaultArgs<ExtArgs>
   receipt?: boolean | Prisma.Booking$receiptArgs<ExtArgs>
@@ -2726,10 +3205,12 @@ export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  assignedDriver?: boolean | Prisma.Booking$assignedDriverArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   van?: boolean | Prisma.VanDefaultArgs<ExtArgs>
 }
 export type BookingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  assignedDriver?: boolean | Prisma.Booking$assignedDriverArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   van?: boolean | Prisma.VanDefaultArgs<ExtArgs>
 }
@@ -2737,6 +3218,7 @@ export type BookingIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Booking"
   objects: {
+    assignedDriver: Prisma.$UserPayload<ExtArgs> | null
     user: Prisma.$UserPayload<ExtArgs>
     van: Prisma.$VanPayload<ExtArgs>
     receipt: Prisma.$ReceiptPayload<ExtArgs> | null
@@ -2769,6 +3251,9 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     savedCardId: string | null
     licenseUrl: string | null
     notes: string | null
+    assignedDriverId: string | null
+    driverNote: string | null
+    deliveredAt: Date | null
     cardAuthActive: boolean
     cardAuthExpiresAt: Date | null
     cardDeactivatedAt: Date | null
@@ -3168,6 +3653,7 @@ readonly fields: BookingFieldRefs;
  */
 export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  assignedDriver<T extends Prisma.Booking$assignedDriverArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$assignedDriverArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   van<T extends Prisma.VanDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VanDefaultArgs<ExtArgs>>): Prisma.Prisma__VanClient<runtime.Types.Result.GetResult<Prisma.$VanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   receipt<T extends Prisma.Booking$receiptArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$receiptArgs<ExtArgs>>): Prisma.Prisma__ReceiptClient<runtime.Types.Result.GetResult<Prisma.$ReceiptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -3227,6 +3713,9 @@ export interface BookingFieldRefs {
   readonly savedCardId: Prisma.FieldRef<"Booking", 'String'>
   readonly licenseUrl: Prisma.FieldRef<"Booking", 'String'>
   readonly notes: Prisma.FieldRef<"Booking", 'String'>
+  readonly assignedDriverId: Prisma.FieldRef<"Booking", 'String'>
+  readonly driverNote: Prisma.FieldRef<"Booking", 'String'>
+  readonly deliveredAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly cardAuthActive: Prisma.FieldRef<"Booking", 'Boolean'>
   readonly cardAuthExpiresAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly cardDeactivatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
@@ -3630,6 +4119,25 @@ export type BookingDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Bookings to delete.
    */
   limit?: number
+}
+
+/**
+ * Booking.assignedDriver
+ */
+export type Booking$assignedDriverArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

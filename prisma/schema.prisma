@@ -14,6 +14,7 @@ datasource db {
 enum Role {
   CUSTOMER
   ADMIN
+  DRIVER
 }
 
 enum BookingStatus {
@@ -59,10 +60,11 @@ model User {
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 
-  accounts   Account[]
-  sessions   Session[]
-  bookings   Booking[]
-  savedCards SavedCard[]
+  accounts        Account[]
+  sessions        Session[]
+  bookings        Booking[]
+  savedCards      SavedCard[]
+  driverBookings  Booking[]   @relation("DriverBookings")
 }
 
 model Account {
@@ -146,6 +148,11 @@ model Booking {
   savedCardId     String?
   licenseUrl      String?
   notes           String?
+
+  assignedDriverId String?
+  assignedDriver   User?    @relation("DriverBookings", fields: [assignedDriverId], references: [id])
+  driverNote       String?
+  deliveredAt      DateTime?
 
   cardAuthActive    Boolean   @default(false)
   cardAuthExpiresAt DateTime?

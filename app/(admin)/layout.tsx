@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import NextAuthProvider from "@/components/layout/session-provider";
 import Link from "next/link";
-import { Truck, BarChart3, CalendarCheck, Users, Settings, ShieldCheck, LogOut } from "lucide-react";
+import { Truck, BarChart3, CalendarCheck, Users, Settings, LogOut, UserCog } from "lucide-react";
 import { signOut } from "@/auth";
 
 const navItems = [
@@ -10,6 +10,7 @@ const navItems = [
   { href: "/admin/vans",      icon: Truck,         label: "Fleet" },
   { href: "/admin/bookings",  icon: CalendarCheck, label: "Bookings" },
   { href: "/admin/customers", icon: Users,         label: "Customers" },
+  { href: "/admin/drivers",   icon: UserCog,       label: "Drivers" },
   { href: "/admin/settings",  icon: Settings,      label: "Settings" },
 ];
 
