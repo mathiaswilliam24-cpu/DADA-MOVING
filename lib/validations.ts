@@ -27,8 +27,12 @@ export const bookingSchema = z.object({
   startTime: z.string().min(1, "Start time is required"),
   endDate: z.string().min(1, "End date is required"),
   endTime: z.string().min(1, "End time is required"),
-  pickupLocation: z.string().min(3, "Pickup location is required"),
+  pickupLocation: z.string().min(3, "Delivery address is required"),
   stateTaxCode: z.string().length(2, "Please select a state"),
+  firstName: z.string().min(2, "First name is required"),
+  lastName: z.string().min(2, "Last name is required"),
+  phone: z.string().min(7, "Phone number is required"),
+  email: z.string().email("Valid email is required"),
   licenseUrl: z.string().optional(),
   notes: z.string().optional(),
 });

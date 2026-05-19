@@ -89,19 +89,30 @@ function BookingPageContent() {
 
   const [vans, setVans] = useState<Van[]>([]);
   const [states, setStates] = useState<StateTax[]>([]);
-  const [settings, setSettings] = useState({ hourlyRate: "17", insuranceFee: "4" });
+  const [settings, setSettings] = useState({ hourlyRate: "17.99", insuranceFee: "4" });
   const [step, setStep] = useState<"form" | "payment" | "success">("form");
   const [bookingId, setBookingId] = useState<string | null>(null);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [userInfo, setUserInfo] = useState({ firstName: "", lastName: "", phone: "", email: "" });
 
   useEffect(() => {
     Promise.all([
       fetch("/api/vans?available=true").then(r => r.json()),
       fetch("/api/taxes").then(r => r.json()),
-    ]).then(([vansData, taxesData]) => {
+      fetch("/api/profile").then(r => r.ok ? r.json() : null),
+    ]).then(([vansData, taxesData, profileData]) => {
       setVans(vansData);
       setStates(taxesData);
+      if (profileData) {
+        const nameParts = (profileData.name || "").split(" ");
+        setUserInfo({
+          firstName: nameParts[0] || "",
+          lastName: nameParts.slice(1).join(" ") || "",
+          phone: profileData.phone || "",
+          email: profileData.email || "",
+        });
+      }
     });
   }, []);
 
@@ -178,7 +189,7 @@ function BookingPageContent() {
           </h3>
           <ul className="space-y-2.5">
             {[
-              "Only $17/hour — all sizes",
+              "Only $17.99/hour — all sizes",
               "Zero mileage fees",
               "Fixed $4 insurance",
               "Transparent pricing",
@@ -206,6 +217,10 @@ function BookingPageContent() {
             states={states}
             settings={settings}
             defaultVanId={defaultVanId}
+            defaultFirstName={userInfo.firstName}
+            defaultLastName={userInfo.lastName}
+            defaultPhone={userInfo.phone}
+            defaultEmail={userInfo.email}
             onSubmit={handleBookingSubmit}
             isSubmitting={isSubmitting}
           />

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookingSchema, type BookingInput } from "@/lib/validations";
 import PriceCalculator from "./price-calculator";
-import { CalendarDays, Clock, MapPin, Upload, Truck, ChevronDown } from "lucide-react";
+import { CalendarDays, Clock, MapPin, Upload, Truck, ChevronDown, User, Phone, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Van {
@@ -32,11 +32,15 @@ interface Props {
   states: StateTax[];
   settings: Settings;
   defaultVanId?: string;
+  defaultFirstName?: string;
+  defaultLastName?: string;
+  defaultPhone?: string;
+  defaultEmail?: string;
   onSubmit: (data: BookingInput & { hours: number }) => Promise<void>;
   isSubmitting: boolean;
 }
 
-export default function BookingForm({ vans, states, settings, defaultVanId, onSubmit, isSubmitting }: Props) {
+export default function BookingForm({ vans, states, settings, defaultVanId, defaultFirstName, defaultLastName, defaultPhone, defaultEmail, onSubmit, isSubmitting }: Props) {
   const [hours, setHours] = useState(0);
   const [licenseUrl, setLicenseUrl] = useState<string>("");
 
@@ -52,6 +56,10 @@ export default function BookingForm({ vans, states, settings, defaultVanId, onSu
       vanId: defaultVanId || "",
       stateTaxCode: "TX",
       startDate: new Date().toISOString().split("T")[0],
+      firstName: defaultFirstName || "",
+      lastName: defaultLastName || "",
+      phone: defaultPhone || "",
+      email: defaultEmail || "",
     },
   });
 
@@ -245,10 +253,75 @@ export default function BookingForm({ vans, states, settings, defaultVanId, onSu
         </div>
       </div>
 
-      {/* Step 4: License Upload */}
+      {/* Step 4: Personal Information */}
       <div>
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#2563eb] text-white text-xs font-bold flex items-center justify-center">4</span>
+          Your Information
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <Label>First Name *</Label>
+            <div className="relative">
+              <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
+              <input
+                type="text"
+                placeholder="John"
+                {...register("firstName")}
+                className={cn(inputCls, "pl-9", errors.firstName ? errCls : okCls)}
+              />
+            </div>
+            <Error msg={errors.firstName?.message} />
+          </div>
+          <div>
+            <Label>Last Name *</Label>
+            <div className="relative">
+              <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
+              <input
+                type="text"
+                placeholder="Smith"
+                {...register("lastName")}
+                className={cn(inputCls, "pl-9", errors.lastName ? errCls : okCls)}
+              />
+            </div>
+            <Error msg={errors.lastName?.message} />
+          </div>
+          <div>
+            <Label>Phone Number *</Label>
+            <div className="relative">
+              <Phone size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
+              <input
+                type="tel"
+                placeholder="+1 (713) 555-0000"
+                {...register("phone")}
+                className={cn(inputCls, "pl-9", errors.phone ? errCls : okCls)}
+              />
+            </div>
+            <Error msg={errors.phone?.message} />
+          </div>
+          <div>
+            <Label>Email Address *</Label>
+            <div className="relative">
+              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
+              <input
+                type="email"
+                placeholder="you@example.com"
+                {...register("email")}
+                className={cn(inputCls, "pl-9", errors.email ? errCls : okCls)}
+              />
+            </div>
+            <Error msg={errors.email?.message} />
+          </div>
+        </div>
+        <p className="text-xs text-[#6b7280] mt-2">
+          📧 You will receive booking confirmation by email and SMS.
+        </p>
+      </div>
+
+      {/* Step 5: License Upload */}
+      <div>
+        <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+          <span className="w-7 h-7 rounded-full bg-[#2563eb] text-white text-xs font-bold flex items-center justify-center">5</span>
           Driver's License
         </h2>
         <div className="rounded-xl border border-dashed border-[#374151] bg-[#1f2937]/50 p-6 text-center">
