@@ -6,18 +6,21 @@ import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { Menu, X, Truck, User, LogOut, LayoutDashboard, ShieldCheck, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "/fleet",        label: "Our Vans" },
-  { href: "/pricing",      label: "Pricing" },
-  { href: "/how-it-works", label: "How It Works" },
-];
+import LanguageSwitcher from "@/components/ui/language-switcher";
+import { useLanguage } from "@/components/providers/language-provider";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropOpen, setDropOpen] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
+  const { t } = useLanguage();
+
+  const navLinks = [
+    { href: "/fleet",        label: t.nav.ourVans },
+    { href: "/pricing",      label: t.nav.pricing },
+    { href: "/how-it-works", label: t.nav.howItWorks },
+  ];
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-[#e2e8f0] shadow-sm">
@@ -28,10 +31,12 @@ export default function Header() {
             <span className="w-2 h-2 bg-[#f59e0b] rounded-full animate-pulse" />
             Houston, TX — Available Now
           </span>
-          <span className="flex items-center gap-1.5">
-            <Phone size={11} />
-            Call us: (713) 555-0000
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5">
+              <Phone size={11} />
+              (713) 555-0000
+            </span>
+          </div>
         </div>
       </div>
 
@@ -68,6 +73,7 @@ export default function Header() {
 
           {/* CTA + Account */}
           <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher variant="light" />
             {session ? (
               <div className="relative">
                 <button
@@ -128,16 +134,20 @@ export default function Header() {
               </Link>
             ))}
             <div className="h-px bg-[#e2e8f0] my-2" />
+            <div className="flex items-center gap-2 px-4 py-2">
+              <span className="text-xs text-[#94a3b8]">Language:</span>
+              <LanguageSwitcher variant="light" />
+            </div>
             <Link href="/booking" onClick={() => setOpen(false)} className="block px-4 py-3 bg-[#f59e0b] text-white text-sm font-bold rounded-xl text-center">
-              Book a Van →
+              {t.nav.bookNow}
             </Link>
             {session ? (
               <>
                 <Link href={session.user?.role === "ADMIN" ? "/admin" : "/dashboard"} onClick={() => setOpen(false)} className="block px-4 py-3 text-sm text-[#475569] hover:bg-[#f1f5f9] rounded-lg">
-                  {session.user?.role === "ADMIN" ? "Admin Dashboard" : "My Dashboard"}
+                  {session.user?.role === "ADMIN" ? t.nav.adminDashboard : t.nav.myDashboard}
                 </Link>
                 <button onClick={() => { signOut({ callbackUrl: "/" }); setOpen(false); }} className="block px-4 py-3 text-sm text-red-600 hover:bg-red-50 rounded-lg w-full text-left">
-                  Sign Out
+                  {t.nav.signOut}
                 </button>
               </>
             ) : (

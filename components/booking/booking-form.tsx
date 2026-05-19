@@ -7,6 +7,7 @@ import { bookingSchema, type BookingInput } from "@/lib/validations";
 import PriceCalculator from "./price-calculator";
 import { CalendarDays, Clock, MapPin, Upload, Truck, ChevronDown, User, Phone, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/components/providers/language-provider";
 
 interface Van {
   id: string;
@@ -41,6 +42,8 @@ interface Props {
 }
 
 export default function BookingForm({ vans, states, settings, defaultVanId, defaultFirstName, defaultLastName, defaultPhone, defaultEmail, onSubmit, isSubmitting }: Props) {
+  const { t } = useLanguage();
+  const b = t.booking;
   const [hours, setHours] = useState(0);
   const [licenseUrl, setLicenseUrl] = useState<string>("");
 
@@ -101,7 +104,7 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
       <div>
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#2563eb] text-white text-xs font-bold flex items-center justify-center">1</span>
-          Select Your Van
+          {b.step1}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {vans.filter(v => v.isAvailable).map((van) => {
@@ -145,11 +148,11 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
       <div>
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#2563eb] text-white text-xs font-bold flex items-center justify-center">2</span>
-          Rental Date & Time
+          {b.step2}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <Label>Start Date</Label>
+            <Label>{b.startDate}</Label>
             <div className="relative">
               <CalendarDays size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
@@ -162,7 +165,7 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             <Error msg={errors.startDate?.message} />
           </div>
           <div>
-            <Label>Start Time</Label>
+            <Label>{b.startTime}</Label>
             <div className="relative">
               <Clock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
@@ -174,7 +177,7 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             <Error msg={errors.startTime?.message} />
           </div>
           <div>
-            <Label>End Date</Label>
+            <Label>{b.endDate}</Label>
             <div className="relative">
               <CalendarDays size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
@@ -187,7 +190,7 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             <Error msg={errors.endDate?.message} />
           </div>
           <div>
-            <Label>End Time</Label>
+            <Label>{b.endTime}</Label>
             <div className="relative">
               <Clock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
@@ -202,8 +205,8 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
         {hours > 0 && (
           <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-[#1e3a5f]/60 border border-[#2563eb]/30 rounded-lg text-sm text-[#93c5fd]">
             <Clock size={14} />
-            Duration: <strong className="text-white">{hours} hour{hours !== 1 ? "s" : ""}</strong>
-            {hours < 2 && <span className="text-orange-400 text-xs ml-1">(minimum 2 hours)</span>}
+            {b.duration}: <strong className="text-white">{hours} hour{hours !== 1 ? "s" : ""}</strong>
+            {hours < 2 && <span className="text-orange-400 text-xs ml-1">{b.minimum}</span>}
           </div>
         )}
       </div>
@@ -212,20 +215,20 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
       <div>
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#2563eb] text-white text-xs font-bold flex items-center justify-center">3</span>
-          Adresse de Livraison
+          {b.step3}
         </h2>
         <div className="bg-blue-900/30 border border-blue-700/40 rounded-xl p-3 mb-4 text-sm text-blue-200 flex items-start gap-2">
           <span className="text-blue-400 flex-shrink-0">🚐</span>
-          <span>DADA MOVING livre directement le van à votre adresse. Vous n'avez pas besoin de vous déplacer !</span>
+          <span>{b.deliveryNote}</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
-            <Label>Adresse complète de livraison *</Label>
+            <Label>{b.deliveryLabel}</Label>
             <div className="relative">
               <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
                 type="text"
-                placeholder="Ex: 1234 Main St, Houston, TX 77001"
+                placeholder={b.deliveryPlaceholder}
                 {...register("pickupLocation")}
                 className={cn(inputCls, "pl-9", errors.pickupLocation ? errCls : okCls)}
               />
@@ -233,7 +236,7 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             <Error msg={errors.pickupLocation?.message} />
           </div>
           <div>
-            <Label>State (for tax calculation)</Label>
+            <Label>{b.stateLabel}</Label>
             <div className="relative">
               <select
                 {...register("stateTaxCode")}
@@ -257,16 +260,16 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
       <div>
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#2563eb] text-white text-xs font-bold flex items-center justify-center">4</span>
-          Your Information
+          {b.step4}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <Label>First Name *</Label>
+            <Label>{b.firstName}</Label>
             <div className="relative">
               <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
                 type="text"
-                placeholder="John"
+                placeholder={b.firstNamePlaceholder}
                 {...register("firstName")}
                 className={cn(inputCls, "pl-9", errors.firstName ? errCls : okCls)}
               />
@@ -274,12 +277,12 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             <Error msg={errors.firstName?.message} />
           </div>
           <div>
-            <Label>Last Name *</Label>
+            <Label>{b.lastName}</Label>
             <div className="relative">
               <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
                 type="text"
-                placeholder="Smith"
+                placeholder={b.lastNamePlaceholder}
                 {...register("lastName")}
                 className={cn(inputCls, "pl-9", errors.lastName ? errCls : okCls)}
               />
@@ -287,12 +290,12 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             <Error msg={errors.lastName?.message} />
           </div>
           <div>
-            <Label>Phone Number *</Label>
+            <Label>{b.phone}</Label>
             <div className="relative">
               <Phone size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
                 type="tel"
-                placeholder="+1 (713) 555-0000"
+                placeholder={b.phonePlaceholder}
                 {...register("phone")}
                 className={cn(inputCls, "pl-9", errors.phone ? errCls : okCls)}
               />
@@ -300,12 +303,12 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             <Error msg={errors.phone?.message} />
           </div>
           <div>
-            <Label>Email Address *</Label>
+            <Label>{b.email}</Label>
             <div className="relative">
               <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
                 type="email"
-                placeholder="you@example.com"
+                placeholder={b.emailPlaceholder}
                 {...register("email")}
                 className={cn(inputCls, "pl-9", errors.email ? errCls : okCls)}
               />
@@ -313,27 +316,25 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             <Error msg={errors.email?.message} />
           </div>
         </div>
-        <p className="text-xs text-[#6b7280] mt-2">
-          📧 You will receive booking confirmation by email and SMS.
-        </p>
+        <p className="text-xs text-[#6b7280] mt-2">{b.notifNote}</p>
       </div>
 
       {/* Step 5: License Upload */}
       <div>
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#2563eb] text-white text-xs font-bold flex items-center justify-center">5</span>
-          Driver's License
+          {b.step5}
         </h2>
         <div className="rounded-xl border border-dashed border-[#374151] bg-[#1f2937]/50 p-6 text-center">
           <Upload size={24} className="mx-auto text-[#6b7280] mb-2" />
-          <p className="text-sm text-[#9ca3af] mb-1">Upload a photo of your driver's license</p>
-          <p className="text-xs text-[#6b7280] mb-4">JPG, PNG or PDF (max 8MB)</p>
+          <p className="text-sm text-[#9ca3af] mb-1">{b.licenseTitle}</p>
+          <p className="text-xs text-[#6b7280] mb-4">{b.licenseFormats}</p>
           {licenseUrl ? (
             <div className="inline-flex items-center gap-2 text-sm text-green-400">
               <div className="w-4 h-4 rounded-full bg-green-500 flex items-center justify-center">
                 <div className="w-2 h-2 rounded-full bg-white" />
               </div>
-              License uploaded successfully
+              {b.licenseUploaded}
             </div>
           ) : (
             <input
@@ -350,7 +351,7 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             />
           )}
         </div>
-        <p className="text-xs text-[#6b7280] mt-2">You must be 21+ and hold a valid US driver's license.</p>
+        <p className="text-xs text-[#6b7280] mt-2">{b.licenseNote}</p>
       </div>
 
       {/* Price Calculator */}
@@ -363,10 +364,10 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
 
       {/* Notes */}
       <div>
-        <Label>Additional Notes (optional)</Label>
+        <Label>{b.notes}</Label>
         <textarea
           rows={3}
-          placeholder="Any special requests or notes..."
+          placeholder={b.notesPH}
           {...register("notes")}
           className={cn(inputCls, "resize-none", okCls)}
         />
@@ -383,7 +384,7 @@ export default function BookingForm({ vans, states, settings, defaultVanId, defa
             : "bg-[#2563eb] hover:bg-[#1d4ed8] shadow-lg shadow-blue-900/30 active:scale-[0.98]"
         )}
       >
-        {isSubmitting ? "Processing..." : hours < 2 ? "Minimum 2 Hours Required" : "Continue to Payment →"}
+        {isSubmitting ? b.processing : hours < 2 ? b.minRequired : b.continuePayment}
       </button>
     </form>
   );
