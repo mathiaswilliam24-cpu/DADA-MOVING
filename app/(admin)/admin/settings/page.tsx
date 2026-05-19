@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Save, Loader2, Settings } from "lucide-react";
+import { Save, Loader2, Settings, Image } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface SettingsMap {
@@ -11,16 +11,20 @@ interface SettingsMap {
   lateReturnFee: string;
   cleaningFee: string;
   fuelPolicy: string;
+  heroImage: string;
+  pricingImage: string;
 }
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<SettingsMap>({
-    hourlyRate: "17",
+    hourlyRate: "17.99",
     insuranceFee: "4",
     minHours: "2",
     lateReturnFee: "25",
     cleaningFee: "75",
     fuelPolicy: "",
+    heroImage: "",
+    pricingImage: "",
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -111,6 +115,47 @@ export default function AdminSettingsPage() {
             className={cn(inputCls, "resize-none")}
             placeholder="Describe the fuel policy..."
           />
+        </div>
+
+        {/* Site Images */}
+        <div className="rounded-2xl bg-[#111827] border border-[#1f2937] p-6">
+          <h2 className="text-white font-bold mb-2 flex items-center gap-2">
+            <Image size={18} className="text-[#f59e0b]" />
+            Site Images
+          </h2>
+          <p className="text-[#6b7280] text-xs mb-4">Upload images to ImgBB and paste the Direct Link here.</p>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-xs font-medium text-[#d1d5db] mb-1.5">Hero Image (Homepage Banner)</label>
+              <input
+                type="url"
+                placeholder="https://i.ibb.co/..."
+                value={settings.heroImage}
+                onChange={(e) => setSettings(p => ({ ...p, heroImage: e.target.value }))}
+                className={inputCls}
+              />
+              {settings.heroImage && (
+                <div className="mt-2 rounded-xl overflow-hidden h-28 border border-[#374151]">
+                  <img src={settings.heroImage} alt="Hero preview" className="w-full h-full object-cover" />
+                </div>
+              )}
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-[#d1d5db] mb-1.5">Pricing Banner Image</label>
+              <input
+                type="url"
+                placeholder="https://i.ibb.co/..."
+                value={settings.pricingImage}
+                onChange={(e) => setSettings(p => ({ ...p, pricingImage: e.target.value }))}
+                className={inputCls}
+              />
+              {settings.pricingImage && (
+                <div className="mt-2 rounded-xl overflow-hidden h-28 border border-[#374151]">
+                  <img src={settings.pricingImage} alt="Pricing preview" className="w-full h-full object-cover" />
+                </div>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Pricing preview */}

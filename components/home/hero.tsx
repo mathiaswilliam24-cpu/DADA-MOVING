@@ -5,7 +5,11 @@ import { useState } from "react";
 import { ArrowRight, CheckCircle2, MapPin } from "lucide-react";
 import { PriceTag } from "@/components/ui/price-tag";
 
-export default function Hero() {
+interface Props {
+  heroImage: string;
+}
+
+export default function Hero({ heroImage }: Props) {
   const [location, setLocation] = useState("");
 
   return (
@@ -73,11 +77,11 @@ export default function Hero() {
           <div className="relative hidden lg:block">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1566933293069-b55c7f326dd4?w=700&q=85"
+                src={heroImage}
                 alt="DADA MOVING Van"
-                className="w-full h-[420px] object-cover"
+                className="w-full h-[420px] object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1e3a8a]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1e3a8a]/20 to-transparent" />
             </div>
 
             <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3">

@@ -15,6 +15,18 @@ async function getFeaturedVans() {
   return db.van.findMany({ where: { isAvailable: true }, take: 4, orderBy: { createdAt: "asc" } });
 }
 
+async function getSiteSettings() {
+  const settings = await db.appSettings.findMany({
+    where: { key: { in: ["heroImage", "pricingImage"] } },
+  });
+  const map: Record<string, string> = {};
+  for (const s of settings) map[s.key] = s.value;
+  return {
+    heroImage: map.heroImage || "https://i.ibb.co/7tFG9qkS/Chat-GPT-Image-May-18-2026-09-22-49-PM.png",
+    pricingImage: map.pricingImage || "https://i.ibb.co/gLVqkPKF/Chat-GPT-Image-May-18-2026-09-30-04-PM.png",
+  };
+}
+
 function HowItWorksStrip() {
   const steps = [
     { icon: Truck,      step: "1", title: "Choose your van",        desc: "Browse our fleet and pick the right size." },
@@ -53,7 +65,7 @@ function HowItWorksStrip() {
   );
 }
 
-function PricingBanner() {
+function PricingBanner({ pricingImage }: { pricingImage: string }) {
   return (
     <section className="py-12 bg-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,7 +96,7 @@ function PricingBanner() {
               </Link>
             </div>
             <div className="hidden md:block relative">
-              <img src="https://images.unsplash.com/photo-1566933293069-b55c7f326dd4?w=600&q=80" alt="Van" className="w-full h-full object-cover" />
+              <img src={pricingImage} alt="Van" className="w-full h-full object-cover object-center" />
               <div className="absolute inset-0 bg-gradient-to-r from-[#1e3a8a] to-transparent" />
             </div>
           </div>
@@ -95,13 +107,13 @@ function PricingBanner() {
 }
 
 export default async function HomePage() {
-  const vans = await getFeaturedVans();
+  const [vans, siteSettings] = await Promise.all([getFeaturedVans(), getSiteSettings()]);
 
   return (
     <>
-      <Hero />
+      <Hero heroImage={siteSettings.heroImage} />
       <Features />
-      <PricingBanner />
+      <PricingBanner pricingImage={siteSettings.pricingImage} />
       <HowItWorksStrip />
 
       {/* Featured Vans */}
