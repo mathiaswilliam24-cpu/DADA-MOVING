@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { formatCurrency, formatDateTime, getBookingStatusColor, getBookingStatusLabel, getPaymentStatusColor } from "@/lib/utils";
 import AdminBookingActions from "./booking-actions";
+import AdminBookingCharges from "./booking-charges";
 
 export const dynamic = "force-dynamic";
 
@@ -9,6 +10,7 @@ export default async function AdminBookingsPage() {
     include: {
       van: { select: { name: true } },
       user: { select: { name: true, email: true } },
+      additionalCharges: true,
     },
     orderBy: { createdAt: "desc" },
     take: 100,
@@ -54,7 +56,18 @@ export default async function AdminBookingsPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <AdminBookingActions bookingId={b.id} currentStatus={b.status} currentPayment={b.paymentStatus} />
+                    <div className="flex items-center gap-2">
+                      <AdminBookingActions bookingId={b.id} currentStatus={b.status} currentPayment={b.paymentStatus} />
+                      <AdminBookingCharges
+                        bookingId={b.id}
+                        bookingNumber={b.bookingNumber}
+                        customerName={b.user.name || ""}
+                        taxRate={0.0825}
+                        cardAuthActive={b.cardAuthActive}
+                        cardAuthExpiresAt={b.cardAuthExpiresAt}
+                        chargeCount={b.additionalCharges.length}
+                      />
+                    </div>
                   </td>
                 </tr>
               ))}

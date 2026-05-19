@@ -57,6 +57,8 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Van: 'Van',
   Booking: 'Booking',
+  SavedCard: 'SavedCard',
+  AdditionalCharge: 'AdditionalCharge',
   RentalExtension: 'RentalExtension',
   CheckIn: 'CheckIn',
   DropOff: 'DropOff',
@@ -93,6 +95,7 @@ export const UserScalarFieldEnum = {
   phone: 'phone',
   role: 'role',
   isActive: 'isActive',
+  stripeCustomerId: 'stripeCustomerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -172,13 +175,57 @@ export const BookingScalarFieldEnum = {
   status: 'status',
   paymentStatus: 'paymentStatus',
   stripePaymentId: 'stripePaymentId',
+  stripePaymentMethodId: 'stripePaymentMethodId',
+  savedCardId: 'savedCardId',
   licenseUrl: 'licenseUrl',
   notes: 'notes',
+  cardAuthActive: 'cardAuthActive',
+  cardAuthExpiresAt: 'cardAuthExpiresAt',
+  cardDeactivatedAt: 'cardDeactivatedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const SavedCardScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  stripeCustomerId: 'stripeCustomerId',
+  stripePaymentMethodId: 'stripePaymentMethodId',
+  brand: 'brand',
+  last4: 'last4',
+  expMonth: 'expMonth',
+  expYear: 'expYear',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt'
+} as const
+
+export type SavedCardScalarFieldEnum = (typeof SavedCardScalarFieldEnum)[keyof typeof SavedCardScalarFieldEnum]
+
+
+export const AdditionalChargeScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  reason: 'reason',
+  description: 'description',
+  amount: 'amount',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  totalAmount: 'totalAmount',
+  stripePaymentId: 'stripePaymentId',
+  paymentStatus: 'paymentStatus',
+  documents: 'documents',
+  invoiceData: 'invoiceData',
+  smsSentAt: 'smsSentAt',
+  emailSentAt: 'emailSentAt',
+  smsStatus: 'smsStatus',
+  emailStatus: 'emailStatus',
+  createdAt: 'createdAt'
+} as const
+
+export type AdditionalChargeScalarFieldEnum = (typeof AdditionalChargeScalarFieldEnum)[keyof typeof AdditionalChargeScalarFieldEnum]
 
 
 export const RentalExtensionScalarFieldEnum = {

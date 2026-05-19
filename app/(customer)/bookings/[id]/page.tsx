@@ -4,8 +4,9 @@ import { notFound } from "next/navigation";
 import { formatCurrency, formatDateTime, getBookingStatusColor, getBookingStatusLabel, getPaymentStatusColor } from "@/lib/utils";
 import ReceiptButton from "@/components/customer/receipt-button";
 import Link from "next/link";
-import { ArrowLeft, Truck, CalendarDays, MapPin, Clock, History, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Truck, CalendarDays, MapPin, Clock, History, CheckCircle2, DollarSign } from "lucide-react";
 import ExtendRentalButton from "@/components/customer/extend-rental-button";
+import RentalCompletionTimer from "@/components/customer/rental-completion-timer";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +17,12 @@ export default async function BookingDetailPage({ params }: { params: Promise<{ 
   const { id } = await params;
   const booking = await db.booking.findFirst({
     where: { id, userId: session.user.id },
-    include: { van: true, receipt: true, extensions: { orderBy: { createdAt: "asc" } } },
+    include: {
+      van: true,
+      receipt: true,
+      extensions: { orderBy: { createdAt: "asc" } },
+      additionalCharges: { orderBy: { createdAt: "asc" } },
+    },
   });
 
   if (!booking) notFound();
@@ -153,6 +159,46 @@ export default async function BookingDetailPage({ params }: { params: Promise<{ 
               {formatCurrency(booking.extensions.reduce((s, e) => s + e.totalAdditional, 0))}
             </span>
           </div>
+        </div>
+      )}
+
+      {/* Additional Charges History */}
+      {booking.additionalCharges.length > 0 && (
+        <div className="rounded-2xl bg-[#111827] border border-red-900/40 p-5 mb-4">
+          <h2 className="text-white font-semibold mb-4 flex items-center gap-2">
+            <DollarSign size={16} className="text-red-400" />
+            Additional Charges
+          </h2>
+          <div className="space-y-3">
+            {booking.additionalCharges.map((charge) => (
+              <div key={charge.id} className="p-3 bg-[#1f2937] rounded-xl">
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <span className="text-white text-sm font-semibold">{charge.reason}</span>
+                  <span className="text-red-400 font-bold">{formatCurrency(charge.totalAmount)}</span>
+                </div>
+                <p className="text-xs text-[#9ca3af] mb-1">{charge.description}</p>
+                <div className="flex items-center justify-between text-xs text-[#6b7280]">
+                  <span>{formatDateTime(charge.createdAt)}</span>
+                  <span className={`font-semibold ${charge.paymentStatus === "PAID" ? "text-green-400" : "text-red-400"}`}>
+                    {charge.paymentStatus}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 pt-3 border-t border-[#1f2937] flex justify-between text-sm">
+            <span className="text-[#9ca3af]">Total Additional Charges</span>
+            <span className="text-red-400 font-bold">
+              {formatCurrency(booking.additionalCharges.reduce((s, c) => s + c.totalAmount, 0))}
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Rental Completion Timer — shown after drop-off for 1 minute */}
+      {booking.status === "DROPOFF_PENDING" && booking.cardAuthExpiresAt && (
+        <div className="mb-4">
+          <RentalCompletionTimer bookingId={booking.id} cardAuthExpiresAt={booking.cardAuthExpiresAt} />
         </div>
       )}
 

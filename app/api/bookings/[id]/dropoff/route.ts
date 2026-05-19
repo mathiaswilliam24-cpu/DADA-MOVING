@@ -49,10 +49,16 @@ export async function POST(
       },
     });
 
-    // Update booking status
+    // Set card auth to expire in 1 minute after drop-off
+    const cardAuthExpiresAt = new Date(dropOffTime.getTime() + 60 * 1000);
+
+    // Update booking status + card auth expiry
     await db.booking.update({
       where: { id: booking.id },
-      data: { status: "DROPOFF_PENDING" },
+      data: {
+        status: "DROPOFF_PENDING",
+        cardAuthExpiresAt,
+      },
     });
 
     const customerName = booking.user.name || "Customer";

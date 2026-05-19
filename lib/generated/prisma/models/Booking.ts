@@ -65,8 +65,13 @@ export type BookingMinAggregateOutputType = {
   status: $Enums.BookingStatus | null
   paymentStatus: $Enums.PaymentStatus | null
   stripePaymentId: string | null
+  stripePaymentMethodId: string | null
+  savedCardId: string | null
   licenseUrl: string | null
   notes: string | null
+  cardAuthActive: boolean | null
+  cardAuthExpiresAt: Date | null
+  cardDeactivatedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -90,8 +95,13 @@ export type BookingMaxAggregateOutputType = {
   status: $Enums.BookingStatus | null
   paymentStatus: $Enums.PaymentStatus | null
   stripePaymentId: string | null
+  stripePaymentMethodId: string | null
+  savedCardId: string | null
   licenseUrl: string | null
   notes: string | null
+  cardAuthActive: boolean | null
+  cardAuthExpiresAt: Date | null
+  cardDeactivatedAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -115,8 +125,13 @@ export type BookingCountAggregateOutputType = {
   status: number
   paymentStatus: number
   stripePaymentId: number
+  stripePaymentMethodId: number
+  savedCardId: number
   licenseUrl: number
   notes: number
+  cardAuthActive: number
+  cardAuthExpiresAt: number
+  cardDeactivatedAt: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -162,8 +177,13 @@ export type BookingMinAggregateInputType = {
   status?: true
   paymentStatus?: true
   stripePaymentId?: true
+  stripePaymentMethodId?: true
+  savedCardId?: true
   licenseUrl?: true
   notes?: true
+  cardAuthActive?: true
+  cardAuthExpiresAt?: true
+  cardDeactivatedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -187,8 +207,13 @@ export type BookingMaxAggregateInputType = {
   status?: true
   paymentStatus?: true
   stripePaymentId?: true
+  stripePaymentMethodId?: true
+  savedCardId?: true
   licenseUrl?: true
   notes?: true
+  cardAuthActive?: true
+  cardAuthExpiresAt?: true
+  cardDeactivatedAt?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -212,8 +237,13 @@ export type BookingCountAggregateInputType = {
   status?: true
   paymentStatus?: true
   stripePaymentId?: true
+  stripePaymentMethodId?: true
+  savedCardId?: true
   licenseUrl?: true
   notes?: true
+  cardAuthActive?: true
+  cardAuthExpiresAt?: true
+  cardDeactivatedAt?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -324,8 +354,13 @@ export type BookingGroupByOutputType = {
   status: $Enums.BookingStatus
   paymentStatus: $Enums.PaymentStatus
   stripePaymentId: string | null
+  stripePaymentMethodId: string | null
+  savedCardId: string | null
   licenseUrl: string | null
   notes: string | null
+  cardAuthActive: boolean
+  cardAuthExpiresAt: Date | null
+  cardDeactivatedAt: Date | null
   createdAt: Date
   updatedAt: Date
   _count: BookingCountAggregateOutputType | null
@@ -372,8 +407,13 @@ export type BookingWhereInput = {
   status?: Prisma.EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
   stripePaymentId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  stripePaymentMethodId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  savedCardId?: Prisma.StringNullableFilter<"Booking"> | string | null
   licenseUrl?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  cardAuthActive?: Prisma.BoolFilter<"Booking"> | boolean
+  cardAuthExpiresAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
+  cardDeactivatedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -383,6 +423,7 @@ export type BookingWhereInput = {
   dropOff?: Prisma.XOR<Prisma.DropOffNullableScalarRelationFilter, Prisma.DropOffWhereInput> | null
   notifications?: Prisma.NotificationLogListRelationFilter
   extensions?: Prisma.RentalExtensionListRelationFilter
+  additionalCharges?: Prisma.AdditionalChargeListRelationFilter
 }
 
 export type BookingOrderByWithRelationInput = {
@@ -404,8 +445,13 @@ export type BookingOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripePaymentMethodId?: Prisma.SortOrderInput | Prisma.SortOrder
+  savedCardId?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardAuthActive?: Prisma.SortOrder
+  cardAuthExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardDeactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -415,6 +461,7 @@ export type BookingOrderByWithRelationInput = {
   dropOff?: Prisma.DropOffOrderByWithRelationInput
   notifications?: Prisma.NotificationLogOrderByRelationAggregateInput
   extensions?: Prisma.RentalExtensionOrderByRelationAggregateInput
+  additionalCharges?: Prisma.AdditionalChargeOrderByRelationAggregateInput
 }
 
 export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -439,8 +486,13 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
   stripePaymentId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  stripePaymentMethodId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  savedCardId?: Prisma.StringNullableFilter<"Booking"> | string | null
   licenseUrl?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  cardAuthActive?: Prisma.BoolFilter<"Booking"> | boolean
+  cardAuthExpiresAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
+  cardDeactivatedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -450,6 +502,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   dropOff?: Prisma.XOR<Prisma.DropOffNullableScalarRelationFilter, Prisma.DropOffWhereInput> | null
   notifications?: Prisma.NotificationLogListRelationFilter
   extensions?: Prisma.RentalExtensionListRelationFilter
+  additionalCharges?: Prisma.AdditionalChargeListRelationFilter
 }, "id" | "bookingNumber">
 
 export type BookingOrderByWithAggregationInput = {
@@ -471,8 +524,13 @@ export type BookingOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  stripePaymentMethodId?: Prisma.SortOrderInput | Prisma.SortOrder
+  savedCardId?: Prisma.SortOrderInput | Prisma.SortOrder
   licenseUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardAuthActive?: Prisma.SortOrder
+  cardAuthExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  cardDeactivatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.BookingCountOrderByAggregateInput
@@ -504,8 +562,13 @@ export type BookingScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumBookingStatusWithAggregatesFilter<"Booking"> | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusWithAggregatesFilter<"Booking"> | $Enums.PaymentStatus
   stripePaymentId?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  stripePaymentMethodId?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  savedCardId?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   licenseUrl?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Booking"> | string | null
+  cardAuthActive?: Prisma.BoolWithAggregatesFilter<"Booking"> | boolean
+  cardAuthExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
+  cardDeactivatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Booking"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Booking"> | Date | string
 }
@@ -527,8 +590,13 @@ export type BookingCreateInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -538,6 +606,7 @@ export type BookingCreateInput = {
   dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateInput = {
@@ -559,8 +628,13 @@ export type BookingUncheckedCreateInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
@@ -568,6 +642,7 @@ export type BookingUncheckedCreateInput = {
   dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUpdateInput = {
@@ -587,8 +662,13 @@ export type BookingUpdateInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -598,6 +678,7 @@ export type BookingUpdateInput = {
   dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateInput = {
@@ -619,8 +700,13 @@ export type BookingUncheckedUpdateInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
@@ -628,6 +714,7 @@ export type BookingUncheckedUpdateInput = {
   dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateManyInput = {
@@ -649,8 +736,13 @@ export type BookingCreateManyInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -672,8 +764,13 @@ export type BookingUpdateManyMutationInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -697,8 +794,13 @@ export type BookingUncheckedUpdateManyInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -732,8 +834,13 @@ export type BookingCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
+  stripePaymentMethodId?: Prisma.SortOrder
+  savedCardId?: Prisma.SortOrder
   licenseUrl?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  cardAuthActive?: Prisma.SortOrder
+  cardAuthExpiresAt?: Prisma.SortOrder
+  cardDeactivatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -767,8 +874,13 @@ export type BookingMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
+  stripePaymentMethodId?: Prisma.SortOrder
+  savedCardId?: Prisma.SortOrder
   licenseUrl?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  cardAuthActive?: Prisma.SortOrder
+  cardAuthExpiresAt?: Prisma.SortOrder
+  cardDeactivatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -792,8 +904,13 @@ export type BookingMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   paymentStatus?: Prisma.SortOrder
   stripePaymentId?: Prisma.SortOrder
+  stripePaymentMethodId?: Prisma.SortOrder
+  savedCardId?: Prisma.SortOrder
   licenseUrl?: Prisma.SortOrder
   notes?: Prisma.SortOrder
+  cardAuthActive?: Prisma.SortOrder
+  cardAuthExpiresAt?: Prisma.SortOrder
+  cardDeactivatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -913,6 +1030,20 @@ export type EnumPaymentStatusFieldUpdateOperationsInput = {
   set?: $Enums.PaymentStatus
 }
 
+export type BookingCreateNestedOneWithoutAdditionalChargesInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutAdditionalChargesInput, Prisma.BookingUncheckedCreateWithoutAdditionalChargesInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutAdditionalChargesInput
+  connect?: Prisma.BookingWhereUniqueInput
+}
+
+export type BookingUpdateOneRequiredWithoutAdditionalChargesNestedInput = {
+  create?: Prisma.XOR<Prisma.BookingCreateWithoutAdditionalChargesInput, Prisma.BookingUncheckedCreateWithoutAdditionalChargesInput>
+  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutAdditionalChargesInput
+  upsert?: Prisma.BookingUpsertWithoutAdditionalChargesInput
+  connect?: Prisma.BookingWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutAdditionalChargesInput, Prisma.BookingUpdateWithoutAdditionalChargesInput>, Prisma.BookingUncheckedUpdateWithoutAdditionalChargesInput>
+}
+
 export type BookingCreateNestedOneWithoutExtensionsInput = {
   create?: Prisma.XOR<Prisma.BookingCreateWithoutExtensionsInput, Prisma.BookingUncheckedCreateWithoutExtensionsInput>
   connectOrCreate?: Prisma.BookingCreateOrConnectWithoutExtensionsInput
@@ -1000,8 +1131,13 @@ export type BookingCreateWithoutUserInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   van: Prisma.VanCreateNestedOneWithoutBookingsInput
@@ -1010,6 +1146,7 @@ export type BookingCreateWithoutUserInput = {
   dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutUserInput = {
@@ -1030,8 +1167,13 @@ export type BookingUncheckedCreateWithoutUserInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
@@ -1039,6 +1181,7 @@ export type BookingUncheckedCreateWithoutUserInput = {
   dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutUserInput = {
@@ -1089,8 +1232,13 @@ export type BookingScalarWhereInput = {
   status?: Prisma.EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
   stripePaymentId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  stripePaymentMethodId?: Prisma.StringNullableFilter<"Booking"> | string | null
+  savedCardId?: Prisma.StringNullableFilter<"Booking"> | string | null
   licenseUrl?: Prisma.StringNullableFilter<"Booking"> | string | null
   notes?: Prisma.StringNullableFilter<"Booking"> | string | null
+  cardAuthActive?: Prisma.BoolFilter<"Booking"> | boolean
+  cardAuthExpiresAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
+  cardDeactivatedAt?: Prisma.DateTimeNullableFilter<"Booking"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
 }
@@ -1112,8 +1260,13 @@ export type BookingCreateWithoutVanInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1122,6 +1275,7 @@ export type BookingCreateWithoutVanInput = {
   dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutVanInput = {
@@ -1142,8 +1296,13 @@ export type BookingUncheckedCreateWithoutVanInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
@@ -1151,6 +1310,7 @@ export type BookingUncheckedCreateWithoutVanInput = {
   dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutVanInput = {
@@ -1179,6 +1339,162 @@ export type BookingUpdateManyWithWhereWithoutVanInput = {
   data: Prisma.XOR<Prisma.BookingUpdateManyMutationInput, Prisma.BookingUncheckedUpdateManyWithoutVanInput>
 }
 
+export type BookingCreateWithoutAdditionalChargesInput = {
+  id?: string
+  bookingNumber: string
+  startDate: Date | string
+  endDate: Date | string
+  hours: number
+  deliveryAddress: string
+  stateTaxCode?: string
+  rentalFee: number
+  insuranceFee: number
+  subtotal: number
+  taxRate: number
+  taxAmount: number
+  totalAmount: number
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
+  licenseUrl?: string | null
+  notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutBookingsInput
+  van: Prisma.VanCreateNestedOneWithoutBookingsInput
+  receipt?: Prisma.ReceiptCreateNestedOneWithoutBookingInput
+  checkIn?: Prisma.CheckInCreateNestedOneWithoutBookingInput
+  dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
+  notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
+  extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+}
+
+export type BookingUncheckedCreateWithoutAdditionalChargesInput = {
+  id?: string
+  bookingNumber: string
+  userId: string
+  vanId: string
+  startDate: Date | string
+  endDate: Date | string
+  hours: number
+  deliveryAddress: string
+  stateTaxCode?: string
+  rentalFee: number
+  insuranceFee: number
+  subtotal: number
+  taxRate: number
+  taxAmount: number
+  totalAmount: number
+  status?: $Enums.BookingStatus
+  paymentStatus?: $Enums.PaymentStatus
+  stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
+  licenseUrl?: string | null
+  notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
+  checkIn?: Prisma.CheckInUncheckedCreateNestedOneWithoutBookingInput
+  dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
+  notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
+  extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+}
+
+export type BookingCreateOrConnectWithoutAdditionalChargesInput = {
+  where: Prisma.BookingWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookingCreateWithoutAdditionalChargesInput, Prisma.BookingUncheckedCreateWithoutAdditionalChargesInput>
+}
+
+export type BookingUpsertWithoutAdditionalChargesInput = {
+  update: Prisma.XOR<Prisma.BookingUpdateWithoutAdditionalChargesInput, Prisma.BookingUncheckedUpdateWithoutAdditionalChargesInput>
+  create: Prisma.XOR<Prisma.BookingCreateWithoutAdditionalChargesInput, Prisma.BookingUncheckedCreateWithoutAdditionalChargesInput>
+  where?: Prisma.BookingWhereInput
+}
+
+export type BookingUpdateToOneWithWhereWithoutAdditionalChargesInput = {
+  where?: Prisma.BookingWhereInput
+  data: Prisma.XOR<Prisma.BookingUpdateWithoutAdditionalChargesInput, Prisma.BookingUncheckedUpdateWithoutAdditionalChargesInput>
+}
+
+export type BookingUpdateWithoutAdditionalChargesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  hours?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  stateTaxCode?: Prisma.StringFieldUpdateOperationsInput | string
+  rentalFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  insuranceFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
+  van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
+  receipt?: Prisma.ReceiptUpdateOneWithoutBookingNestedInput
+  checkIn?: Prisma.CheckInUpdateOneWithoutBookingNestedInput
+  dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
+  notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
+  extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+}
+
+export type BookingUncheckedUpdateWithoutAdditionalChargesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  bookingNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  vanId?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  hours?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  stateTaxCode?: Prisma.StringFieldUpdateOperationsInput | string
+  rentalFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  insuranceFee?: Prisma.FloatFieldUpdateOperationsInput | number
+  subtotal?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxRate?: Prisma.FloatFieldUpdateOperationsInput | number
+  taxAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  totalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+  stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
+  checkIn?: Prisma.CheckInUncheckedUpdateOneWithoutBookingNestedInput
+  dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
+  notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
+  extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+}
+
 export type BookingCreateWithoutExtensionsInput = {
   id?: string
   bookingNumber: string
@@ -1196,8 +1512,13 @@ export type BookingCreateWithoutExtensionsInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1206,6 +1527,7 @@ export type BookingCreateWithoutExtensionsInput = {
   checkIn?: Prisma.CheckInCreateNestedOneWithoutBookingInput
   dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutExtensionsInput = {
@@ -1227,14 +1549,20 @@ export type BookingUncheckedCreateWithoutExtensionsInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
   checkIn?: Prisma.CheckInUncheckedCreateNestedOneWithoutBookingInput
   dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutExtensionsInput = {
@@ -1270,8 +1598,13 @@ export type BookingUpdateWithoutExtensionsInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1280,6 +1613,7 @@ export type BookingUpdateWithoutExtensionsInput = {
   checkIn?: Prisma.CheckInUpdateOneWithoutBookingNestedInput
   dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutExtensionsInput = {
@@ -1301,14 +1635,20 @@ export type BookingUncheckedUpdateWithoutExtensionsInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
   checkIn?: Prisma.CheckInUncheckedUpdateOneWithoutBookingNestedInput
   dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutCheckInInput = {
@@ -1328,8 +1668,13 @@ export type BookingCreateWithoutCheckInInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1338,6 +1683,7 @@ export type BookingCreateWithoutCheckInInput = {
   dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutCheckInInput = {
@@ -1359,14 +1705,20 @@ export type BookingUncheckedCreateWithoutCheckInInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
   dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutCheckInInput = {
@@ -1402,8 +1754,13 @@ export type BookingUpdateWithoutCheckInInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1412,6 +1769,7 @@ export type BookingUpdateWithoutCheckInInput = {
   dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutCheckInInput = {
@@ -1433,14 +1791,20 @@ export type BookingUncheckedUpdateWithoutCheckInInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
   dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutDropOffInput = {
@@ -1460,8 +1824,13 @@ export type BookingCreateWithoutDropOffInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1470,6 +1839,7 @@ export type BookingCreateWithoutDropOffInput = {
   checkIn?: Prisma.CheckInCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutDropOffInput = {
@@ -1491,14 +1861,20 @@ export type BookingUncheckedCreateWithoutDropOffInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
   checkIn?: Prisma.CheckInUncheckedCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutDropOffInput = {
@@ -1534,8 +1910,13 @@ export type BookingUpdateWithoutDropOffInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1544,6 +1925,7 @@ export type BookingUpdateWithoutDropOffInput = {
   checkIn?: Prisma.CheckInUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutDropOffInput = {
@@ -1565,14 +1947,20 @@ export type BookingUncheckedUpdateWithoutDropOffInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
   checkIn?: Prisma.CheckInUncheckedUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutNotificationsInput = {
@@ -1592,8 +1980,13 @@ export type BookingCreateWithoutNotificationsInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1602,6 +1995,7 @@ export type BookingCreateWithoutNotificationsInput = {
   checkIn?: Prisma.CheckInCreateNestedOneWithoutBookingInput
   dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
   extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutNotificationsInput = {
@@ -1623,14 +2017,20 @@ export type BookingUncheckedCreateWithoutNotificationsInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   receipt?: Prisma.ReceiptUncheckedCreateNestedOneWithoutBookingInput
   checkIn?: Prisma.CheckInUncheckedCreateNestedOneWithoutBookingInput
   dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
   extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutNotificationsInput = {
@@ -1666,8 +2066,13 @@ export type BookingUpdateWithoutNotificationsInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1676,6 +2081,7 @@ export type BookingUpdateWithoutNotificationsInput = {
   checkIn?: Prisma.CheckInUpdateOneWithoutBookingNestedInput
   dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutNotificationsInput = {
@@ -1697,14 +2103,20 @@ export type BookingUncheckedUpdateWithoutNotificationsInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
   checkIn?: Prisma.CheckInUncheckedUpdateOneWithoutBookingNestedInput
   dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateWithoutReceiptInput = {
@@ -1724,8 +2136,13 @@ export type BookingCreateWithoutReceiptInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutBookingsInput
@@ -1734,6 +2151,7 @@ export type BookingCreateWithoutReceiptInput = {
   dropOff?: Prisma.DropOffCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeCreateNestedManyWithoutBookingInput
 }
 
 export type BookingUncheckedCreateWithoutReceiptInput = {
@@ -1755,14 +2173,20 @@ export type BookingUncheckedCreateWithoutReceiptInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   checkIn?: Prisma.CheckInUncheckedCreateNestedOneWithoutBookingInput
   dropOff?: Prisma.DropOffUncheckedCreateNestedOneWithoutBookingInput
   notifications?: Prisma.NotificationLogUncheckedCreateNestedManyWithoutBookingInput
   extensions?: Prisma.RentalExtensionUncheckedCreateNestedManyWithoutBookingInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedCreateNestedManyWithoutBookingInput
 }
 
 export type BookingCreateOrConnectWithoutReceiptInput = {
@@ -1798,8 +2222,13 @@ export type BookingUpdateWithoutReceiptInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1808,6 +2237,7 @@ export type BookingUpdateWithoutReceiptInput = {
   dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutReceiptInput = {
@@ -1829,14 +2259,20 @@ export type BookingUncheckedUpdateWithoutReceiptInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   checkIn?: Prisma.CheckInUncheckedUpdateOneWithoutBookingNestedInput
   dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingCreateManyUserInput = {
@@ -1857,8 +2293,13 @@ export type BookingCreateManyUserInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1880,8 +2321,13 @@ export type BookingUpdateWithoutUserInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   van?: Prisma.VanUpdateOneRequiredWithoutBookingsNestedInput
@@ -1890,6 +2336,7 @@ export type BookingUpdateWithoutUserInput = {
   dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutUserInput = {
@@ -1910,8 +2357,13 @@ export type BookingUncheckedUpdateWithoutUserInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
@@ -1919,6 +2371,7 @@ export type BookingUncheckedUpdateWithoutUserInput = {
   dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutUserInput = {
@@ -1939,8 +2392,13 @@ export type BookingUncheckedUpdateManyWithoutUserInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1963,8 +2421,13 @@ export type BookingCreateManyVanInput = {
   status?: $Enums.BookingStatus
   paymentStatus?: $Enums.PaymentStatus
   stripePaymentId?: string | null
+  stripePaymentMethodId?: string | null
+  savedCardId?: string | null
   licenseUrl?: string | null
   notes?: string | null
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: Date | string | null
+  cardDeactivatedAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1986,8 +2449,13 @@ export type BookingUpdateWithoutVanInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutBookingsNestedInput
@@ -1996,6 +2464,7 @@ export type BookingUpdateWithoutVanInput = {
   dropOff?: Prisma.DropOffUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateWithoutVanInput = {
@@ -2016,8 +2485,13 @@ export type BookingUncheckedUpdateWithoutVanInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   receipt?: Prisma.ReceiptUncheckedUpdateOneWithoutBookingNestedInput
@@ -2025,6 +2499,7 @@ export type BookingUncheckedUpdateWithoutVanInput = {
   dropOff?: Prisma.DropOffUncheckedUpdateOneWithoutBookingNestedInput
   notifications?: Prisma.NotificationLogUncheckedUpdateManyWithoutBookingNestedInput
   extensions?: Prisma.RentalExtensionUncheckedUpdateManyWithoutBookingNestedInput
+  additionalCharges?: Prisma.AdditionalChargeUncheckedUpdateManyWithoutBookingNestedInput
 }
 
 export type BookingUncheckedUpdateManyWithoutVanInput = {
@@ -2045,8 +2520,13 @@ export type BookingUncheckedUpdateManyWithoutVanInput = {
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   paymentStatus?: Prisma.EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
   stripePaymentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePaymentMethodId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  savedCardId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   licenseUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cardAuthActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cardAuthExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  cardDeactivatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2059,11 +2539,13 @@ export type BookingUncheckedUpdateManyWithoutVanInput = {
 export type BookingCountOutputType = {
   notifications: number
   extensions: number
+  additionalCharges: number
 }
 
 export type BookingCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   notifications?: boolean | BookingCountOutputTypeCountNotificationsArgs
   extensions?: boolean | BookingCountOutputTypeCountExtensionsArgs
+  additionalCharges?: boolean | BookingCountOutputTypeCountAdditionalChargesArgs
 }
 
 /**
@@ -2090,6 +2572,13 @@ export type BookingCountOutputTypeCountExtensionsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.RentalExtensionWhereInput
 }
 
+/**
+ * BookingCountOutputType without action
+ */
+export type BookingCountOutputTypeCountAdditionalChargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdditionalChargeWhereInput
+}
+
 
 export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2110,8 +2599,13 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   status?: boolean
   paymentStatus?: boolean
   stripePaymentId?: boolean
+  stripePaymentMethodId?: boolean
+  savedCardId?: boolean
   licenseUrl?: boolean
   notes?: boolean
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: boolean
+  cardDeactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2121,6 +2615,7 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   dropOff?: boolean | Prisma.Booking$dropOffArgs<ExtArgs>
   notifications?: boolean | Prisma.Booking$notificationsArgs<ExtArgs>
   extensions?: boolean | Prisma.Booking$extensionsArgs<ExtArgs>
+  additionalCharges?: boolean | Prisma.Booking$additionalChargesArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -2143,8 +2638,13 @@ export type BookingSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   paymentStatus?: boolean
   stripePaymentId?: boolean
+  stripePaymentMethodId?: boolean
+  savedCardId?: boolean
   licenseUrl?: boolean
   notes?: boolean
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: boolean
+  cardDeactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2170,8 +2670,13 @@ export type BookingSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   paymentStatus?: boolean
   stripePaymentId?: boolean
+  stripePaymentMethodId?: boolean
+  savedCardId?: boolean
   licenseUrl?: boolean
   notes?: boolean
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: boolean
+  cardDeactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -2197,13 +2702,18 @@ export type BookingSelectScalar = {
   status?: boolean
   paymentStatus?: boolean
   stripePaymentId?: boolean
+  stripePaymentMethodId?: boolean
+  savedCardId?: boolean
   licenseUrl?: boolean
   notes?: boolean
+  cardAuthActive?: boolean
+  cardAuthExpiresAt?: boolean
+  cardDeactivatedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingNumber" | "userId" | "vanId" | "startDate" | "endDate" | "hours" | "deliveryAddress" | "stateTaxCode" | "rentalFee" | "insuranceFee" | "subtotal" | "taxRate" | "taxAmount" | "totalAmount" | "status" | "paymentStatus" | "stripePaymentId" | "licenseUrl" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "bookingNumber" | "userId" | "vanId" | "startDate" | "endDate" | "hours" | "deliveryAddress" | "stateTaxCode" | "rentalFee" | "insuranceFee" | "subtotal" | "taxRate" | "taxAmount" | "totalAmount" | "status" | "paymentStatus" | "stripePaymentId" | "stripePaymentMethodId" | "savedCardId" | "licenseUrl" | "notes" | "cardAuthActive" | "cardAuthExpiresAt" | "cardDeactivatedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   van?: boolean | Prisma.VanDefaultArgs<ExtArgs>
@@ -2212,6 +2722,7 @@ export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   dropOff?: boolean | Prisma.Booking$dropOffArgs<ExtArgs>
   notifications?: boolean | Prisma.Booking$notificationsArgs<ExtArgs>
   extensions?: boolean | Prisma.Booking$extensionsArgs<ExtArgs>
+  additionalCharges?: boolean | Prisma.Booking$additionalChargesArgs<ExtArgs>
   _count?: boolean | Prisma.BookingCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookingIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2233,6 +2744,7 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     dropOff: Prisma.$DropOffPayload<ExtArgs> | null
     notifications: Prisma.$NotificationLogPayload<ExtArgs>[]
     extensions: Prisma.$RentalExtensionPayload<ExtArgs>[]
+    additionalCharges: Prisma.$AdditionalChargePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2253,8 +2765,13 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     stripePaymentId: string | null
+    stripePaymentMethodId: string | null
+    savedCardId: string | null
     licenseUrl: string | null
     notes: string | null
+    cardAuthActive: boolean
+    cardAuthExpiresAt: Date | null
+    cardDeactivatedAt: Date | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["booking"]>
@@ -2658,6 +3175,7 @@ export interface Prisma__BookingClient<T, Null = never, ExtArgs extends runtime.
   dropOff<T extends Prisma.Booking$dropOffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$dropOffArgs<ExtArgs>>): Prisma.Prisma__DropOffClient<runtime.Types.Result.GetResult<Prisma.$DropOffPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   notifications<T extends Prisma.Booking$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   extensions<T extends Prisma.Booking$extensionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$extensionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RentalExtensionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  additionalCharges<T extends Prisma.Booking$additionalChargesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Booking$additionalChargesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdditionalChargePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2705,8 +3223,13 @@ export interface BookingFieldRefs {
   readonly status: Prisma.FieldRef<"Booking", 'BookingStatus'>
   readonly paymentStatus: Prisma.FieldRef<"Booking", 'PaymentStatus'>
   readonly stripePaymentId: Prisma.FieldRef<"Booking", 'String'>
+  readonly stripePaymentMethodId: Prisma.FieldRef<"Booking", 'String'>
+  readonly savedCardId: Prisma.FieldRef<"Booking", 'String'>
   readonly licenseUrl: Prisma.FieldRef<"Booking", 'String'>
   readonly notes: Prisma.FieldRef<"Booking", 'String'>
+  readonly cardAuthActive: Prisma.FieldRef<"Booking", 'Boolean'>
+  readonly cardAuthExpiresAt: Prisma.FieldRef<"Booking", 'DateTime'>
+  readonly cardDeactivatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Booking", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Booking", 'DateTime'>
 }
@@ -3212,6 +3735,30 @@ export type Booking$extensionsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.RentalExtensionScalarFieldEnum | Prisma.RentalExtensionScalarFieldEnum[]
+}
+
+/**
+ * Booking.additionalCharges
+ */
+export type Booking$additionalChargesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdditionalCharge
+   */
+  select?: Prisma.AdditionalChargeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdditionalCharge
+   */
+  omit?: Prisma.AdditionalChargeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdditionalChargeInclude<ExtArgs> | null
+  where?: Prisma.AdditionalChargeWhereInput
+  orderBy?: Prisma.AdditionalChargeOrderByWithRelationInput | Prisma.AdditionalChargeOrderByWithRelationInput[]
+  cursor?: Prisma.AdditionalChargeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdditionalChargeScalarFieldEnum | Prisma.AdditionalChargeScalarFieldEnum[]
 }
 
 /**

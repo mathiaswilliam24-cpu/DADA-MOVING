@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { registerSchema, type RegisterInput } from "@/lib/validations";
 import { Truck, Mail, Lock, User, Phone, Eye, EyeOff, Loader2 } from "lucide-react";
+import GoogleSignInButton from "@/components/ui/google-sign-in-button";
 import { cn } from "@/lib/utils";
 import NextAuthProvider from "@/components/layout/session-provider";
 
@@ -59,6 +60,15 @@ function RegisterForm() {
         </div>
 
         <div className="bg-[#111827] border border-[#1f2937] rounded-2xl p-8">
+          {/* Google Sign Up */}
+          <GoogleSignInButton callbackUrl="/dashboard" label="Sign up with Google" />
+
+          <div className="flex items-center gap-3 my-5">
+            <div className="flex-1 h-px bg-[#1f2937]" />
+            <span className="text-xs text-[#6b7280] font-medium">or create account with email</span>
+            <div className="flex-1 h-px bg-[#1f2937]" />
+          </div>
+
           {error && (
             <div className="mb-5 px-4 py-3 bg-red-900/20 border border-red-800/50 rounded-xl text-sm text-red-400">
               {error}

@@ -8,6 +8,7 @@ import { profileSchema, type ProfileInput } from "@/lib/validations";
 import { User, Phone, Mail, Save, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import NextAuthProvider from "@/components/layout/session-provider";
+import SavedCards from "@/components/customer/saved-cards";
 
 function ProfileForm() {
   const { data: session, update } = useSession();
@@ -100,6 +101,11 @@ function ProfileForm() {
             {isSubmitting ? "Saving..." : "Save Changes"}
           </button>
         </form>
+      </div>
+
+      {/* Saved Cards */}
+      <div className="bg-[#111827] border border-[#1f2937] rounded-2xl p-6">
+        <SavedCards />
       </div>
     </div>
   );

@@ -46,21 +46,23 @@ enum FuelLevel {
 // ============================================================
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  phone         String?
-  role          Role      @default(CUSTOMER)
-  isActive      Boolean   @default(true)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id                String    @id @default(cuid())
+  name              String?
+  email             String    @unique
+  emailVerified     DateTime?
+  image             String?
+  password          String?
+  phone             String?
+  role              Role      @default(CUSTOMER)
+  isActive          Boolean   @default(true)
+  stripeCustomerId  String?   @unique
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
 
-  accounts Account[]
-  sessions Session[]
-  bookings Booking[]
+  accounts   Account[]
+  sessions   Session[]
+  bookings   Booking[]
+  savedCards SavedCard[]
 }
 
 model Account {
@@ -140,8 +142,14 @@ model Booking {
   status          BookingStatus @default(PENDING)
   paymentStatus   PaymentStatus @default(UNPAID)
   stripePaymentId String?
+  stripePaymentMethodId String?
+  savedCardId     String?
   licenseUrl      String?
   notes           String?
+
+  cardAuthActive    Boolean   @default(false)
+  cardAuthExpiresAt DateTime?
+  cardDeactivatedAt DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -151,8 +159,48 @@ model Booking {
   receipt Receipt?
   checkIn CheckIn?
   dropOff DropOff?
-  notifications NotificationLog[]
-  extensions    RentalExtension[]
+  notifications      NotificationLog[]
+  extensions         RentalExtension[]
+  additionalCharges  AdditionalCharge[]
+}
+
+model SavedCard {
+  id                    String   @id @default(cuid())
+  userId                String
+  stripeCustomerId      String
+  stripePaymentMethodId String   @unique
+  brand                 String
+  last4                 String
+  expMonth              Int
+  expYear               Int
+  isDefault             Boolean  @default(false)
+  createdAt             DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AdditionalCharge {
+  id              String        @id @default(cuid())
+  bookingId       String
+  reason          String
+  description     String
+  amount          Float
+  taxRate         Float         @default(0)
+  taxAmount       Float         @default(0)
+  totalAmount     Float
+  stripePaymentId String?
+  paymentStatus   PaymentStatus @default(UNPAID)
+  documents       String[]      @default([])
+  invoiceData     String?
+
+  smsSentAt    DateTime?
+  emailSentAt  DateTime?
+  smsStatus    String?
+  emailStatus  String?
+
+  createdAt DateTime @default(now())
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
 model RentalExtension {

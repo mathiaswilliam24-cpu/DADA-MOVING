@@ -72,6 +72,16 @@ export type Van = Prisma.VanModel
  */
 export type Booking = Prisma.BookingModel
 /**
+ * Model SavedCard
+ * 
+ */
+export type SavedCard = Prisma.SavedCardModel
+/**
+ * Model AdditionalCharge
+ * 
+ */
+export type AdditionalCharge = Prisma.AdditionalChargeModel
+/**
  * Model RentalExtension
  * 
  */

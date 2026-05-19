@@ -10,6 +10,7 @@ import { loginSchema, type LoginInput } from "@/lib/validations";
 import { Truck, Mail, Lock, Eye, EyeOff, Loader2, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import NextAuthProvider from "@/components/layout/session-provider";
+import GoogleSignInButton from "@/components/ui/google-sign-in-button";
 
 function LoginForm() {
   const router = useRouter();
@@ -75,7 +76,16 @@ function LoginForm() {
           </div>
 
           <h1 className="text-2xl font-black text-[#0f172a] mb-1">Welcome back!</h1>
-          <p className="text-[#64748b] text-sm mb-8">Sign in to manage your rentals.</p>
+          <p className="text-[#64748b] text-sm mb-6">Sign in to manage your rentals.</p>
+
+          {/* Google Sign In */}
+          <GoogleSignInButton callbackUrl={callbackUrl} label="Continue with Google" />
+
+          <div className="flex items-center gap-3 my-5">
+            <div className="flex-1 h-px bg-[#e2e8f0]" />
+            <span className="text-xs text-[#94a3b8] font-medium">or sign in with email</span>
+            <div className="flex-1 h-px bg-[#e2e8f0]" />
+          </div>
 
           {error && (
             <div className="mb-5 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600">

@@ -390,6 +390,8 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Van: 'Van',
   Booking: 'Booking',
+  SavedCard: 'SavedCard',
+  AdditionalCharge: 'AdditionalCharge',
   RentalExtension: 'RentalExtension',
   CheckIn: 'CheckIn',
   DropOff: 'DropOff',
@@ -413,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "van" | "booking" | "rentalExtension" | "checkIn" | "dropOff" | "notificationLog" | "receipt" | "blockedDate" | "stateTax" | "appSettings"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "van" | "booking" | "savedCard" | "additionalCharge" | "rentalExtension" | "checkIn" | "dropOff" | "notificationLog" | "receipt" | "blockedDate" | "stateTax" | "appSettings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -858,6 +860,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.BookingCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.BookingCountAggregateOutputType> | number
+        }
+      }
+    }
+    SavedCard: {
+      payload: Prisma.$SavedCardPayload<ExtArgs>
+      fields: Prisma.SavedCardFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SavedCardFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SavedCardFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>
+        }
+        findFirst: {
+          args: Prisma.SavedCardFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SavedCardFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>
+        }
+        findMany: {
+          args: Prisma.SavedCardFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>[]
+        }
+        create: {
+          args: Prisma.SavedCardCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>
+        }
+        createMany: {
+          args: Prisma.SavedCardCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SavedCardCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>[]
+        }
+        delete: {
+          args: Prisma.SavedCardDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>
+        }
+        update: {
+          args: Prisma.SavedCardUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>
+        }
+        deleteMany: {
+          args: Prisma.SavedCardDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SavedCardUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SavedCardUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>[]
+        }
+        upsert: {
+          args: Prisma.SavedCardUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SavedCardPayload>
+        }
+        aggregate: {
+          args: Prisma.SavedCardAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSavedCard>
+        }
+        groupBy: {
+          args: Prisma.SavedCardGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SavedCardGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SavedCardCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SavedCardCountAggregateOutputType> | number
+        }
+      }
+    }
+    AdditionalCharge: {
+      payload: Prisma.$AdditionalChargePayload<ExtArgs>
+      fields: Prisma.AdditionalChargeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AdditionalChargeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AdditionalChargeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>
+        }
+        findFirst: {
+          args: Prisma.AdditionalChargeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AdditionalChargeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>
+        }
+        findMany: {
+          args: Prisma.AdditionalChargeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>[]
+        }
+        create: {
+          args: Prisma.AdditionalChargeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>
+        }
+        createMany: {
+          args: Prisma.AdditionalChargeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AdditionalChargeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>[]
+        }
+        delete: {
+          args: Prisma.AdditionalChargeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>
+        }
+        update: {
+          args: Prisma.AdditionalChargeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>
+        }
+        deleteMany: {
+          args: Prisma.AdditionalChargeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AdditionalChargeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AdditionalChargeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>[]
+        }
+        upsert: {
+          args: Prisma.AdditionalChargeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AdditionalChargePayload>
+        }
+        aggregate: {
+          args: Prisma.AdditionalChargeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAdditionalCharge>
+        }
+        groupBy: {
+          args: Prisma.AdditionalChargeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdditionalChargeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AdditionalChargeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AdditionalChargeCountAggregateOutputType> | number
         }
       }
     }
@@ -1502,6 +1652,7 @@ export const UserScalarFieldEnum = {
   phone: 'phone',
   role: 'role',
   isActive: 'isActive',
+  stripeCustomerId: 'stripeCustomerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1581,13 +1732,57 @@ export const BookingScalarFieldEnum = {
   status: 'status',
   paymentStatus: 'paymentStatus',
   stripePaymentId: 'stripePaymentId',
+  stripePaymentMethodId: 'stripePaymentMethodId',
+  savedCardId: 'savedCardId',
   licenseUrl: 'licenseUrl',
   notes: 'notes',
+  cardAuthActive: 'cardAuthActive',
+  cardAuthExpiresAt: 'cardAuthExpiresAt',
+  cardDeactivatedAt: 'cardDeactivatedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const SavedCardScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  stripeCustomerId: 'stripeCustomerId',
+  stripePaymentMethodId: 'stripePaymentMethodId',
+  brand: 'brand',
+  last4: 'last4',
+  expMonth: 'expMonth',
+  expYear: 'expYear',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt'
+} as const
+
+export type SavedCardScalarFieldEnum = (typeof SavedCardScalarFieldEnum)[keyof typeof SavedCardScalarFieldEnum]
+
+
+export const AdditionalChargeScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  reason: 'reason',
+  description: 'description',
+  amount: 'amount',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  totalAmount: 'totalAmount',
+  stripePaymentId: 'stripePaymentId',
+  paymentStatus: 'paymentStatus',
+  documents: 'documents',
+  invoiceData: 'invoiceData',
+  smsSentAt: 'smsSentAt',
+  emailSentAt: 'emailSentAt',
+  smsStatus: 'smsStatus',
+  emailStatus: 'emailStatus',
+  createdAt: 'createdAt'
+} as const
+
+export type AdditionalChargeScalarFieldEnum = (typeof AdditionalChargeScalarFieldEnum)[keyof typeof AdditionalChargeScalarFieldEnum]
 
 
 export const RentalExtensionScalarFieldEnum = {
@@ -1979,6 +2174,8 @@ export type GlobalOmitConfig = {
   verificationToken?: Prisma.VerificationTokenOmit
   van?: Prisma.VanOmit
   booking?: Prisma.BookingOmit
+  savedCard?: Prisma.SavedCardOmit
+  additionalCharge?: Prisma.AdditionalChargeOmit
   rentalExtension?: Prisma.RentalExtensionOmit
   checkIn?: Prisma.CheckInOmit
   dropOff?: Prisma.DropOffOmit
