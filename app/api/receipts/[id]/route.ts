@@ -32,7 +32,7 @@ export async function GET(
       startDate: booking.startDate,
       endDate: booking.endDate,
       hours: booking.hours,
-      pickupLocation: booking.pickupLocation,
+      pickupLocation: booking.deliveryAddress,
       rentalFee: booking.rentalFee,
       insuranceFee: booking.insuranceFee,
       subtotal: booking.subtotal,

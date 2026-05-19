@@ -20,7 +20,10 @@ export type Role = (typeof Role)[keyof typeof Role]
 export const BookingStatus = {
   PENDING: 'PENDING',
   CONFIRMED: 'CONFIRMED',
+  DELIVERED: 'DELIVERED',
+  CHECKIN_COMPLETE: 'CHECKIN_COMPLETE',
   ACTIVE: 'ACTIVE',
+  DROPOFF_PENDING: 'DROPOFF_PENDING',
   COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED'
 } as const
@@ -35,3 +38,14 @@ export const PaymentStatus = {
 } as const
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const FuelLevel = {
+  FULL: 'FULL',
+  THREE_QUARTER: 'THREE_QUARTER',
+  HALF: 'HALF',
+  QUARTER: 'QUARTER',
+  EMPTY: 'EMPTY'
+} as const
+
+export type FuelLevel = (typeof FuelLevel)[keyof typeof FuelLevel]

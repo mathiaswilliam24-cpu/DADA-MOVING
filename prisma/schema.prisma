@@ -19,7 +19,10 @@ enum Role {
 enum BookingStatus {
   PENDING
   CONFIRMED
+  DELIVERED
+  CHECKIN_COMPLETE
   ACTIVE
+  DROPOFF_PENDING
   COMPLETED
   CANCELLED
 }
@@ -28,6 +31,14 @@ enum PaymentStatus {
   UNPAID
   PAID
   REFUNDED
+}
+
+enum FuelLevel {
+  FULL
+  THREE_QUARTER
+  HALF
+  QUARTER
+  EMPTY
 }
 
 // ============================================================
@@ -116,7 +127,7 @@ model Booking {
   startDate      DateTime
   endDate        DateTime
   hours          Float
-  pickupLocation String
+  deliveryAddress String
   stateTaxCode   String        @default("TX")
 
   rentalFee    Float
@@ -138,6 +149,88 @@ model Booking {
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   van     Van      @relation(fields: [vanId], references: [id])
   receipt Receipt?
+  checkIn CheckIn?
+  dropOff DropOff?
+  notifications NotificationLog[]
+}
+
+model CheckIn {
+  id        String   @id @default(cuid())
+  bookingId String   @unique
+
+  // Photos obligatoires
+  photoFront     String?
+  photoRear      String?
+  photoRight     String?
+  photoLeft      String?
+  photoInterior  String?
+  photoDashboard String?
+  photoFuelGauge String?
+  photoDamages   String[] @default([])
+
+  // Infos véhicule
+  mileageStart Int
+  fuelLevel    FuelLevel
+  driverName   String
+
+  // Signature électronique
+  signatureData  String?
+  termsAccepted  Boolean  @default(false)
+  signedAt       DateTime?
+
+  // Timestamps
+  checkInTime DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  // Notifications
+  smsSentAt    DateTime?
+  emailSentAt  DateTime?
+  smsStatus    String?
+  emailStatus  String?
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+}
+
+model DropOff {
+  id        String   @id @default(cuid())
+  bookingId String   @unique
+
+  // Médias
+  videoUrl   String?
+  photos     String[] @default([])
+
+  // Infos véhicule
+  mileageEnd    Int
+  fuelLevelEnd  FuelLevel
+
+  // GPS
+  gpsLatitude  Float?
+  gpsLongitude Float?
+  gpsAddress   String?
+
+  // Timestamps
+  dropOffTime DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  // Notifications
+  smsSentAt   DateTime?
+  emailSentAt DateTime?
+  smsStatus   String?
+  emailStatus String?
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+}
+
+model NotificationLog {
+  id        String   @id @default(cuid())
+  bookingId String
+  type      String
+  status    String
+  recipient String
+  sentAt    DateTime @default(now())
+  error     String?
+
+  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 }
 
 model Receipt {

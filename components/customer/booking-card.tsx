@@ -5,7 +5,7 @@ import { CalendarDays, Truck, MapPin, Download, Clock } from "lucide-react";
 interface Van { name: string; imageUrl?: string | null; }
 interface Booking {
   id: string; bookingNumber: string; startDate: Date | string; endDate: Date | string;
-  hours: number; pickupLocation: string; totalAmount: number;
+  hours: number; deliveryAddress: string; totalAmount: number;
   status: string; paymentStatus: string; van: Van;
 }
 
@@ -44,7 +44,7 @@ export default function BookingCard({ booking }: { booking: Booking }) {
         </div>
         <div className="flex items-center gap-2 text-sm text-[#64748b]">
           <MapPin size={14} className="text-[#1e3a8a] flex-shrink-0" />
-          <span className="truncate">{booking.pickupLocation}</span>
+          <span className="truncate">{booking.deliveryAddress}</span>
         </div>
       </div>
 

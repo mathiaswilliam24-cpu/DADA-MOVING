@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid data", issues: parsed.error.issues }, { status: 400 });
     }
 
-    const { vanId, startDate, startTime, endDate, endTime, pickupLocation, stateTaxCode, licenseUrl, notes } = parsed.data;
+    const { vanId, startDate, startTime, endDate, endTime, pickupLocation: deliveryAddress, stateTaxCode, licenseUrl, notes } = parsed.data;
 
     const start = new Date(`${startDate}T${startTime}`);
     const end = new Date(`${endDate}T${endTime}`);
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
         startDate: start,
         endDate: end,
         hours,
-        pickupLocation,
+        deliveryAddress,
         stateTaxCode: stateTaxCode.toUpperCase(),
         rentalFee: price.rentalFee,
         insuranceFee: price.insuranceFee,

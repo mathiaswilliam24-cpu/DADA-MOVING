@@ -48,6 +48,21 @@ export type Van = Prisma.VanModel
  */
 export type Booking = Prisma.BookingModel
 /**
+ * Model CheckIn
+ * 
+ */
+export type CheckIn = Prisma.CheckInModel
+/**
+ * Model DropOff
+ * 
+ */
+export type DropOff = Prisma.DropOffModel
+/**
+ * Model NotificationLog
+ * 
+ */
+export type NotificationLog = Prisma.NotificationLogModel
+/**
  * Model Receipt
  * 
  */

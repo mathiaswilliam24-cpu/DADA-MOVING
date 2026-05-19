@@ -57,6 +57,9 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Van: 'Van',
   Booking: 'Booking',
+  CheckIn: 'CheckIn',
+  DropOff: 'DropOff',
+  NotificationLog: 'NotificationLog',
   Receipt: 'Receipt',
   BlockedDate: 'BlockedDate',
   StateTax: 'StateTax',
@@ -157,7 +160,7 @@ export const BookingScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   hours: 'hours',
-  pickupLocation: 'pickupLocation',
+  deliveryAddress: 'deliveryAddress',
   stateTaxCode: 'stateTaxCode',
   rentalFee: 'rentalFee',
   insuranceFee: 'insuranceFee',
@@ -175,6 +178,68 @@ export const BookingScalarFieldEnum = {
 } as const
 
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
+
+
+export const CheckInScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  photoFront: 'photoFront',
+  photoRear: 'photoRear',
+  photoRight: 'photoRight',
+  photoLeft: 'photoLeft',
+  photoInterior: 'photoInterior',
+  photoDashboard: 'photoDashboard',
+  photoFuelGauge: 'photoFuelGauge',
+  photoDamages: 'photoDamages',
+  mileageStart: 'mileageStart',
+  fuelLevel: 'fuelLevel',
+  driverName: 'driverName',
+  signatureData: 'signatureData',
+  termsAccepted: 'termsAccepted',
+  signedAt: 'signedAt',
+  checkInTime: 'checkInTime',
+  createdAt: 'createdAt',
+  smsSentAt: 'smsSentAt',
+  emailSentAt: 'emailSentAt',
+  smsStatus: 'smsStatus',
+  emailStatus: 'emailStatus'
+} as const
+
+export type CheckInScalarFieldEnum = (typeof CheckInScalarFieldEnum)[keyof typeof CheckInScalarFieldEnum]
+
+
+export const DropOffScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  videoUrl: 'videoUrl',
+  photos: 'photos',
+  mileageEnd: 'mileageEnd',
+  fuelLevelEnd: 'fuelLevelEnd',
+  gpsLatitude: 'gpsLatitude',
+  gpsLongitude: 'gpsLongitude',
+  gpsAddress: 'gpsAddress',
+  dropOffTime: 'dropOffTime',
+  createdAt: 'createdAt',
+  smsSentAt: 'smsSentAt',
+  emailSentAt: 'emailSentAt',
+  smsStatus: 'smsStatus',
+  emailStatus: 'emailStatus'
+} as const
+
+export type DropOffScalarFieldEnum = (typeof DropOffScalarFieldEnum)[keyof typeof DropOffScalarFieldEnum]
+
+
+export const NotificationLogScalarFieldEnum = {
+  id: 'id',
+  bookingId: 'bookingId',
+  type: 'type',
+  status: 'status',
+  recipient: 'recipient',
+  sentAt: 'sentAt',
+  error: 'error'
+} as const
+
+export type NotificationLogScalarFieldEnum = (typeof NotificationLogScalarFieldEnum)[keyof typeof NotificationLogScalarFieldEnum]
 
 
 export const ReceiptScalarFieldEnum = {

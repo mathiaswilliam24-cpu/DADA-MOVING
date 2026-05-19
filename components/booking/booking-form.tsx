@@ -200,20 +200,24 @@ export default function BookingForm({ vans, states, settings, defaultVanId, onSu
         )}
       </div>
 
-      {/* Step 3: Location & State */}
+      {/* Step 3: Delivery Address */}
       <div>
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           <span className="w-7 h-7 rounded-full bg-[#2563eb] text-white text-xs font-bold flex items-center justify-center">3</span>
-          Pickup Location
+          Adresse de Livraison
         </h2>
+        <div className="bg-blue-900/30 border border-blue-700/40 rounded-xl p-3 mb-4 text-sm text-blue-200 flex items-start gap-2">
+          <span className="text-blue-400 flex-shrink-0">🚐</span>
+          <span>DADA MOVING livre directement le van à votre adresse. Vous n'avez pas besoin de vous déplacer !</span>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="sm:col-span-2">
-            <Label>Pickup Address</Label>
+            <Label>Adresse complète de livraison *</Label>
             <div className="relative">
               <MapPin size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6b7280]" />
               <input
                 type="text"
-                placeholder="Enter pickup address in Houston..."
+                placeholder="Ex: 1234 Main St, Houston, TX 77001"
                 {...register("pickupLocation")}
                 className={cn(inputCls, "pl-9", errors.pickupLocation ? errCls : okCls)}
               />

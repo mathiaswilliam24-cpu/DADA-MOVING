@@ -71,7 +71,7 @@ export default async function BookingDetailPage({ params }: { params: Promise<{ 
             { label: "Pick Up", value: formatDateTime(booking.startDate), icon: CalendarDays },
             { label: "Return", value: formatDateTime(booking.endDate), icon: CalendarDays },
             { label: "Duration", value: `${booking.hours} hour${booking.hours !== 1 ? "s" : ""}`, icon: Clock },
-            { label: "Location", value: booking.pickupLocation, icon: MapPin },
+            { label: "Livraison", value: booking.deliveryAddress, icon: MapPin },
           ].map((row) => (
             <div key={row.label} className="flex items-start gap-2">
               <row.icon size={14} className="text-[#2563eb] mt-0.5 flex-shrink-0" />
