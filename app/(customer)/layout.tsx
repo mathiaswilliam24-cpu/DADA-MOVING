@@ -5,6 +5,7 @@ import Footer from "@/components/layout/footer";
 import NextAuthProvider from "@/components/layout/session-provider";
 import Link from "next/link";
 import { LayoutDashboard, User, Truck } from "lucide-react";
+import WhatsAppButton from "@/components/ui/whatsapp-button";
 
 export default async function CustomerLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
@@ -42,6 +43,7 @@ export default async function CustomerLayout({ children }: { children: React.Rea
         </main>
       </div>
       <Footer />
+      <WhatsAppButton />
     </NextAuthProvider>
   );
 }
